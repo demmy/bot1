@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Enum;
-using System;
+﻿using System;
+using Domain.Entities.Enum;
 
 namespace Domain.Entities
 {

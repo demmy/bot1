@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Setup;
+﻿using Domain.Entities.Enum.Setup;
 
-namespace Data.EFData.Mapping
+namespace DAL.Mapping
 {
     internal class RoleConfiguration : BaseEntityConfiguration<Role>
     {

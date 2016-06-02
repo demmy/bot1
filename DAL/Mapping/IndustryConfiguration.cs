@@ -1,6 +1,6 @@
 ﻿using Domain.Entities.Enum.Setup;
 
-namespace Data.EFData.Mapping
+namespace DAL.Mapping
 {
     public class IndustryConfiguration : BaseEntityConfiguration<Industry>
     {

@@ -1,8 +1,7 @@
-using Domain.Entities.Enum;
-using Domain.Entities.Enum.Setup;
-using Domain.Entities.Setup;
 using System;
 using System.Collections.Generic;
+using Domain.Entities.Enum;
+using Domain.Entities.Enum.Setup;
 
 namespace Domain.Entities
 {

@@ -1,41 +1,35 @@
-﻿using Data.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BaseOfTalents.DAL.Infrastructure;
-using BaseOfTalents.DAL.Repositories;
-using Data.EFData;
+﻿using System.Data.Entity;
+using DAL.Infrastructure;
+using DAL.Repositories;
 
 namespace DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        DbContext context;
+        private ICandidateRepository candidateRepo;
+        private readonly DbContext context;
+        private IFileRepository fileRepo;
 
-        IUserRepository userRepo;
-        ICandidateRepository candidateRepo;
-        IFileRepository fileRepo;
-        IVacancyRepository vacancyRepo;
+        private IUserRepository userRepo;
+        private IVacancyRepository vacancyRepo;
 
         public UnitOfWork(DbContext context)
         {
             this.context = context;
         }
+
         public UnitOfWork()
         {
-            this.context = new BOTContext();
+            context = new BOTContext();
         }
 
         public ICandidateRepository CandidateRepo
         {
             get
             {
-                if (this.candidateRepo == null)
+                if (candidateRepo == null)
                 {
-                    this.candidateRepo = new CandidateRepository(context);
+                    candidateRepo = new CandidateRepository(context);
                 }
 
                 return candidateRepo;
@@ -46,9 +40,9 @@ namespace DAL
         {
             get
             {
-                if (this.fileRepo == null)
+                if (fileRepo == null)
                 {
-                    this.fileRepo = new FileRepository(context);
+                    fileRepo = new FileRepository(context);
                 }
 
                 return fileRepo;
@@ -59,9 +53,9 @@ namespace DAL
         {
             get
             {
-                if (this.userRepo == null)
+                if (userRepo == null)
                 {
-                    this.userRepo = new UserRepository(context);
+                    userRepo = new UserRepository(context);
                 }
 
                 return userRepo;
@@ -72,9 +66,9 @@ namespace DAL
         {
             get
             {
-                if (this.vacancyRepo == null)
+                if (vacancyRepo == null)
                 {
-                    this.vacancyRepo = new VacancyRepository(context);
+                    vacancyRepo = new VacancyRepository(context);
                 }
 
                 return vacancyRepo;

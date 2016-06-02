@@ -1,11 +1,8 @@
 ﻿using Domain.Entities;
 
-namespace Data.EFData.Mapping
+namespace DAL.Mapping
 {
     public class ErrorConfiguration : BaseEntityConfiguration<Error>
     {
-        public ErrorConfiguration()
-        {
-        }
     }
 }

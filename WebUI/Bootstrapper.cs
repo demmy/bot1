@@ -1,6 +1,5 @@
-﻿using Autofac;
-using System;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Autofac;
 
 namespace WebUI
 {

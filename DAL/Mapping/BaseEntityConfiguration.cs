@@ -1,7 +1,7 @@
-﻿using Domain.Entities;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
+using Domain.Entities;
 
-namespace Data.EFData.Mapping
+namespace DAL.Mapping
 {
     public class BaseEntityConfiguration<T> : EntityTypeConfiguration<T> where T : BaseEntity
     {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace BaseOfTalents.DAL.Extensions
+namespace DAL.Extensions
 {
     public class PagedList<T> : IPagedList<T>
     {
@@ -20,17 +17,17 @@ namespace BaseOfTalents.DAL.Extensions
             TotalCount = totalCount;
         }
 
-        public int PageIndex { get; private set; }
+        public int PageIndex { get; }
 
-        public int PageSize { get; private set; }
+        public int PageSize { get; }
 
-        public int TotalCount { get; private set; }
+        public int TotalCount { get; }
 
-        public IList<T> List { get; private set; }
+        public IList<T> List { get; }
 
         IList IPagedList.List
         {
-            get { return (IList)List; }
+            get { return (IList) List; }
         }
     }
 }

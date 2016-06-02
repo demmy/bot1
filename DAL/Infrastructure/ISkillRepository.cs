@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Setup;
+﻿using Domain.Entities.Enum.Setup;
 
-namespace BaseOfTalents.DAL.Infrastructure
+namespace DAL.Infrastructure
 {
     public interface ISkillRepository : IRepository<Skill>
     {

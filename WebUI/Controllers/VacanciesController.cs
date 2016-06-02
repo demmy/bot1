@@ -1,26 +1,23 @@
-﻿
-
-using BaseOfTalents.DAL.Services;
-using DAL.DTO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Results;
+using DAL.DTO;
+using DAL.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace WebUI.Controllers
 {
     [RoutePrefix("api/vacancies")]
     public class VacanciesController : ApiController
     {
-        VacancyService service = new VacancyService();
-
-        protected static JsonSerializerSettings BOT_SERIALIZER_SETTINGS = new JsonSerializerSettings()
+        protected static JsonSerializerSettings BOT_SERIALIZER_SETTINGS = new JsonSerializerSettings
         {
-            ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
+
+        private readonly VacancyService service = new VacancyService();
 
         // GET api/<controller>
         [HttpGet]
@@ -40,12 +37,12 @@ namespace WebUI.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
@@ -53,7 +50,5 @@ namespace WebUI.Controllers
         public void Delete(int id)
         {
         }
-
-
     }
 }

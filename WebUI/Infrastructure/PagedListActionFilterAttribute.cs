@@ -1,11 +1,7 @@
-﻿using BaseOfTalents.DAL.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http.Filters;
+using DAL.Extensions;
 
 namespace WebUI.Infrastructure
 {

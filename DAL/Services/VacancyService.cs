@@ -1,21 +1,17 @@
-﻿using DAL;
-using DAL.DTO;
-using Data.Infrastructure;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DAL.DTO;
+using DAL.Infrastructure;
 
-namespace BaseOfTalents.DAL.Services
+namespace DAL.Services
 {
     public class VacancyService
     {
-        IUnitOfWork uow;
+        private readonly IUnitOfWork uow;
 
         public VacancyService()
         {
-            this.uow = new UnitOfWork();
+            uow = new UnitOfWork();
         }
 
         public VacancyService(IUnitOfWork uow)
@@ -26,7 +22,7 @@ namespace BaseOfTalents.DAL.Services
         public IEnumerable<VacancyDTO> Get(int page, int pageSize)
         {
             return uow.VacancyRepo.Get(page: page, pageSize: pageSize)
-                .Select(vacancy => 
+                .Select(vacancy =>
                     new VacancyDTO
                     {
                         CandidatesProgress = vacancy.CandidatesProgress,

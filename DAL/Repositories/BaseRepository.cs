@@ -1,14 +1,12 @@
-﻿using Data.Infrastructure;
-using Domain.Entities;
-using BaseOfTalents.DAL.Infrastructure;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using DAL.Infrastructure;
+using Domain.Entities;
 
-namespace BaseOfTalents.DAL.Repositories
+namespace DAL.Repositories
 {
     public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
     {
@@ -18,7 +16,7 @@ namespace BaseOfTalents.DAL.Repositories
         public BaseRepository(DbContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            dbSet = context.Set<TEntity>();
         }
 
         public virtual IEnumerable<TEntity> Get(
@@ -34,7 +32,7 @@ namespace BaseOfTalents.DAL.Repositories
             }
 
             foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                (new[] {','}, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(includeProperty);
             }
@@ -43,10 +41,7 @@ namespace BaseOfTalents.DAL.Repositories
             {
                 return orderBy(query).ToList();
             }
-            else
-            {
-                return query.ToList();
-            }
+            return query.ToList();
         }
 
         public virtual TEntity GetByID(object id)
@@ -61,7 +56,7 @@ namespace BaseOfTalents.DAL.Repositories
 
         public virtual void Delete(object id)
         {
-            TEntity entityToDelete = dbSet.Find(id);
+            var entityToDelete = dbSet.Find(id);
             Delete(entityToDelete);
         }
 
@@ -82,7 +77,7 @@ namespace BaseOfTalents.DAL.Repositories
 
         public void Dispose()
         {
-            this.context.Dispose();
+            context.Dispose();
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Domain.Entities.Setup
+namespace Domain.Entities.Enum.Setup
 {
     public class EventType : BaseEntity
     {

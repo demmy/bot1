@@ -1,9 +1,8 @@
 ﻿using System.Data.Entity;
-using Data.Infrastructure;
-using Domain.Entities.Setup;
-using BaseOfTalents.DAL.Infrastructure;
+using DAL.Infrastructure;
+using Domain.Entities.Enum.Setup;
 
-namespace BaseOfTalents.DAL.Repositories
+namespace DAL.Repositories
 {
     public class CityRepository : BaseRepository<Location>, ILocationRepository
     {

@@ -1,8 +1,4 @@
-﻿using Data.EFData.Mapping;
-using Domain.Entities;
-using Domain.Entities.Enum.Setup;
-using Domain.Entities.Setup;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
@@ -10,12 +6,25 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using DAL.Mapping;
+using Domain.Entities;
+using Domain.Entities.Enum.Setup;
 
-namespace Data.EFData
+namespace DAL
 {
     public class BOTContext : DbContext
     {
+        private static readonly Dictionary<Type, EntitySetBase> _mappingCache =
+            new Dictionary<Type, EntitySetBase>();
+
+        public BOTContext()
+        {
+            AppDomain.CurrentDomain.SetData("DataDirectory", Directory.GetCurrentDirectory());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<BOTContext, Configuration>());
+        }
+
         public DbSet<Language> Languages { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -44,12 +53,6 @@ namespace Data.EFData
         public DbSet<Stage> Stages { get; set; }
         public DbSet<SocialNetwork> SocialNetworks { get; set; }
         public DbSet<EventType> EventTypes { get; set; }
-
-        public BOTContext() : base()
-        {
-            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<BOTContext, Configuration>());
-        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -97,13 +100,13 @@ namespace Data.EFData
 
         public override int SaveChanges()
         {
-            ObjectContext context = ((IObjectContextAdapter)this).ObjectContext;
-            IEnumerable<ObjectStateEntry> objectStateEntries =
+            var context = ((IObjectContextAdapter) this).ObjectContext;
+            var objectStateEntries =
                 from e in context.ObjectStateManager.GetObjectStateEntries(EntityState.Added | EntityState.Modified)
                 where
                     e.IsRelationship == false &&
                     e.Entity != null &&
-                    typeof(BaseEntity).IsAssignableFrom(e.Entity.GetType())
+                    typeof (BaseEntity).IsAssignableFrom(e.Entity.GetType())
                 select e;
             foreach (var entry in objectStateEntries)
             {
@@ -117,14 +120,14 @@ namespace Data.EFData
             }
 
             var deletedEntries = from e in context.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted)
-                                 where
-                                     e.IsRelationship == false &&
-                                     e.Entity != null &&
-                                     typeof(BaseEntity).IsAssignableFrom(e.Entity.GetType())
-                                 select e;
+                where
+                    e.IsRelationship == false &&
+                    e.Entity != null &&
+                    typeof (BaseEntity).IsAssignableFrom(e.Entity.GetType())
+                select e;
 
             foreach (var entry in ChangeTracker.Entries()
-                  .Where(p => p.State == EntityState.Deleted).ToList())
+                .Where(p => p.State == EntityState.Deleted).ToList())
                 SoftDelete(entry);
 
             return base.SaveChanges();
@@ -132,15 +135,15 @@ namespace Data.EFData
 
         private void SoftDelete(DbEntityEntry entry)
         {
-            Type entryEntityType = entry.Entity.GetType();
+            var entryEntityType = entry.Entity.GetType();
 
-            string tableName = GetTableName(entryEntityType);
-            string primaryKeyName = GetPrimaryKeyName(entryEntityType);
+            var tableName = GetTableName(entryEntityType);
+            var primaryKeyName = GetPrimaryKeyName(entryEntityType);
 
-            string deletequery =
+            var deletequery =
                 string.Format(
                     "UPDATE {0} SET IsDeleted = 1, State = 1 WHERE {1} = @id",
-                        tableName, primaryKeyName);
+                    tableName, primaryKeyName);
 
             Database.ExecuteSqlCommand(
                 deletequery,
@@ -158,16 +161,16 @@ namespace Data.EFData
         {
             if (!_mappingCache.ContainsKey(type))
             {
-                ObjectContext octx = ((IObjectContextAdapter)this).ObjectContext;
+                var octx = ((IObjectContextAdapter) this).ObjectContext;
 
-                string typeName = ObjectContext.GetObjectType(type).Name;
+                var typeName = ObjectContext.GetObjectType(type).Name;
 
                 var es = octx.MetadataWorkspace
-                                .GetItemCollection(DataSpace.SSpace)
-                                .GetItems<EntityContainer>()
-                                .SelectMany(c => c.BaseEntitySets
-                                               .Where(e => e.Name == typeName))
-                                .FirstOrDefault();
+                    .GetItemCollection(DataSpace.SSpace)
+                    .GetItems<EntityContainer>()
+                    .SelectMany(c => c.BaseEntitySets
+                        .Where(e => e.Name == typeName))
+                    .FirstOrDefault();
 
                 if (es == null)
                     throw new ArgumentException("Entity type not found in GetTableName", typeName);
@@ -180,7 +183,7 @@ namespace Data.EFData
 
         private string GetTableName(Type type)
         {
-            EntitySetBase es = GetEntitySet(type);
+            var es = GetEntitySet(type);
 
             return string.Format("[{0}].[{1}]",
                 es.MetadataProperties["Schema"].Value,
@@ -189,12 +192,9 @@ namespace Data.EFData
 
         private string GetPrimaryKeyName(Type type)
         {
-            EntitySetBase es = GetEntitySet(type);
+            var es = GetEntitySet(type);
 
             return es.ElementType.KeyMembers[0].Name;
         }
-
-        private static Dictionary<Type, EntitySetBase> _mappingCache =
-       new Dictionary<Type, EntitySetBase>();
     }
 }

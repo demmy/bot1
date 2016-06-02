@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Data.EFData.Mapping
+namespace DAL.Mapping
 {
     public class LanguageSkillConfiguration : BaseEntityConfiguration<LanguageSkill>
     {

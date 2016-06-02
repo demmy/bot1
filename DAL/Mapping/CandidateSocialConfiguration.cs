@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Data.EFData.Mapping
+namespace DAL.Mapping
 {
     public class CandidateSocialConfiguration : BaseEntityConfiguration<CandidateSocial>
     {
@@ -8,7 +8,9 @@ namespace Data.EFData.Mapping
         {
             Property(cs => cs.Path).IsRequired();
 
-            HasRequired(cs => cs.SocialNetwork).WithMany(x => x.CandidateSocials).HasForeignKey(cs => cs.SocialNetworkId);
+            HasRequired(cs => cs.SocialNetwork)
+                .WithMany(x => x.CandidateSocials)
+                .HasForeignKey(cs => cs.SocialNetworkId);
         }
     }
 }

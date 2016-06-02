@@ -1,7 +1,6 @@
-﻿using Domain.Entities.Enum;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Domain.Entities.Setup
+namespace Domain.Entities.Enum.Setup
 {
     public class Permission : BaseEntity
     {

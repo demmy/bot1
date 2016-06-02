@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Setup;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Domain.Entities.Enum.Setup;
 
 namespace Domain.Entities
 {

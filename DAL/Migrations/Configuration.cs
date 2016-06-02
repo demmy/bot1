@@ -1,18 +1,15 @@
-namespace BaseOfTalents.DAL.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Data.EFData.BOTContext>
+namespace DAL.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<BOTContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Data.EFData.BOTContext context)
+        protected override void Seed(BOTContext context)
         {
             context.Tags.AddRange(DummyData.Tags);
             context.SaveChanges();
