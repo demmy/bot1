@@ -1,8 +1,8 @@
-﻿using System.Data.Entity;
-using DAL.Infrastructure;
-using Domain.Entities;
+﻿using BaseOfTalents.DAL.Infrastructure;
+using BaseOfTalents.Domain.Entities;
+using System.Data.Entity;
 
-namespace DAL.Repositories
+namespace BaseOfTalents.DAL.Repositories
 {
     public class FileRepository : BaseRepository<File>, IFileRepository
     {

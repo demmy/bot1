@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BaseOfTalents.DAL.Mapping;
+using BaseOfTalents.Domain.Entities;
+using BaseOfTalents.Domain.Entities.Enum.Setup;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
@@ -8,11 +11,8 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using DAL.Mapping;
-using Domain.Entities;
-using Domain.Entities.Enum.Setup;
 
-namespace DAL
+namespace BaseOfTalents.DAL
 {
     public class BOTContext : DbContext
     {
@@ -100,13 +100,13 @@ namespace DAL
 
         public override int SaveChanges()
         {
-            var context = ((IObjectContextAdapter) this).ObjectContext;
+            var context = ((IObjectContextAdapter)this).ObjectContext;
             var objectStateEntries =
                 from e in context.ObjectStateManager.GetObjectStateEntries(EntityState.Added | EntityState.Modified)
                 where
                     e.IsRelationship == false &&
                     e.Entity != null &&
-                    typeof (BaseEntity).IsAssignableFrom(e.Entity.GetType())
+                    typeof(BaseEntity).IsAssignableFrom(e.Entity.GetType())
                 select e;
             foreach (var entry in objectStateEntries)
             {
@@ -120,11 +120,11 @@ namespace DAL
             }
 
             var deletedEntries = from e in context.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted)
-                where
-                    e.IsRelationship == false &&
-                    e.Entity != null &&
-                    typeof (BaseEntity).IsAssignableFrom(e.Entity.GetType())
-                select e;
+                                 where
+                                     e.IsRelationship == false &&
+                                     e.Entity != null &&
+                                     typeof(BaseEntity).IsAssignableFrom(e.Entity.GetType())
+                                 select e;
 
             foreach (var entry in ChangeTracker.Entries()
                 .Where(p => p.State == EntityState.Deleted).ToList())
@@ -161,7 +161,7 @@ namespace DAL
         {
             if (!_mappingCache.ContainsKey(type))
             {
-                var octx = ((IObjectContextAdapter) this).ObjectContext;
+                var octx = ((IObjectContextAdapter)this).ObjectContext;
 
                 var typeName = ObjectContext.GetObjectType(type).Name;
 

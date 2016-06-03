@@ -1,6 +1,6 @@
 using System.Data.Entity.Migrations;
 
-namespace DAL.Migrations
+namespace BaseOfTalents.DAL.Migrations
 {
     public partial class init : DbMigration
     {
@@ -500,7 +500,7 @@ namespace DAL.Migrations
                     Candidate_Id = c.Int(false),
                     Comment_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Candidate_Id, t.Comment_Id})
+                .PrimaryKey(t => new { t.Candidate_Id, t.Comment_Id })
                 .ForeignKey("dbo.Candidate", t => t.Candidate_Id)
                 .ForeignKey("dbo.Comment", t => t.Comment_Id)
                 .Index(t => t.Candidate_Id)
@@ -513,7 +513,7 @@ namespace DAL.Migrations
                     Candidate_Id = c.Int(false),
                     LanguageSkill_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Candidate_Id, t.LanguageSkill_Id})
+                .PrimaryKey(t => new { t.Candidate_Id, t.LanguageSkill_Id })
                 .ForeignKey("dbo.Candidate", t => t.Candidate_Id)
                 .ForeignKey("dbo.LanguageSkill", t => t.LanguageSkill_Id)
                 .Index(t => t.Candidate_Id)
@@ -526,7 +526,7 @@ namespace DAL.Migrations
                     Candidate_Id = c.Int(false),
                     PhoneNumber_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Candidate_Id, t.PhoneNumber_Id})
+                .PrimaryKey(t => new { t.Candidate_Id, t.PhoneNumber_Id })
                 .ForeignKey("dbo.Candidate", t => t.Candidate_Id)
                 .ForeignKey("dbo.PhoneNumber", t => t.PhoneNumber_Id)
                 .Index(t => t.Candidate_Id)
@@ -539,7 +539,7 @@ namespace DAL.Migrations
                     Candidate_Id = c.Int(false),
                     Skill_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Candidate_Id, t.Skill_Id})
+                .PrimaryKey(t => new { t.Candidate_Id, t.Skill_Id })
                 .ForeignKey("dbo.Candidate", t => t.Candidate_Id)
                 .ForeignKey("dbo.Skill", t => t.Skill_Id)
                 .Index(t => t.Candidate_Id)
@@ -552,7 +552,7 @@ namespace DAL.Migrations
                     Candidate_Id = c.Int(false),
                     Tag_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Candidate_Id, t.Tag_Id})
+                .PrimaryKey(t => new { t.Candidate_Id, t.Tag_Id })
                 .ForeignKey("dbo.Candidate", t => t.Candidate_Id)
                 .ForeignKey("dbo.Tag", t => t.Tag_Id)
                 .Index(t => t.Candidate_Id)
@@ -565,7 +565,7 @@ namespace DAL.Migrations
                     Vacancy_Id = c.Int(false),
                     Comment_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Vacancy_Id, t.Comment_Id})
+                .PrimaryKey(t => new { t.Vacancy_Id, t.Comment_Id })
                 .ForeignKey("dbo.Vacancy", t => t.Vacancy_Id)
                 .ForeignKey("dbo.Comment", t => t.Comment_Id)
                 .Index(t => t.Vacancy_Id)
@@ -578,7 +578,7 @@ namespace DAL.Migrations
                     Vacancy_Id = c.Int(false),
                     Level_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Vacancy_Id, t.Level_Id})
+                .PrimaryKey(t => new { t.Vacancy_Id, t.Level_Id })
                 .ForeignKey("dbo.Vacancy", t => t.Vacancy_Id)
                 .ForeignKey("dbo.Level", t => t.Level_Id)
                 .Index(t => t.Vacancy_Id)
@@ -591,7 +591,7 @@ namespace DAL.Migrations
                     Vacancy_Id = c.Int(false),
                     Location_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Vacancy_Id, t.Location_Id})
+                .PrimaryKey(t => new { t.Vacancy_Id, t.Location_Id })
                 .ForeignKey("dbo.Vacancy", t => t.Vacancy_Id)
                 .ForeignKey("dbo.Location", t => t.Location_Id)
                 .Index(t => t.Vacancy_Id)
@@ -604,7 +604,7 @@ namespace DAL.Migrations
                     Vacancy_Id = c.Int(false),
                     Skill_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Vacancy_Id, t.Skill_Id})
+                .PrimaryKey(t => new { t.Vacancy_Id, t.Skill_Id })
                 .ForeignKey("dbo.Vacancy", t => t.Vacancy_Id)
                 .ForeignKey("dbo.Skill", t => t.Skill_Id)
                 .Index(t => t.Vacancy_Id)
@@ -617,7 +617,7 @@ namespace DAL.Migrations
                     User_Id = c.Int(false),
                     PhoneNumber_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.User_Id, t.PhoneNumber_Id})
+                .PrimaryKey(t => new { t.User_Id, t.PhoneNumber_Id })
                 .ForeignKey("dbo.User", t => t.User_Id)
                 .ForeignKey("dbo.PhoneNumber", t => t.PhoneNumber_Id)
                 .Index(t => t.User_Id)
@@ -630,7 +630,7 @@ namespace DAL.Migrations
                     Permission_Id = c.Int(false),
                     Role_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Permission_Id, t.Role_Id})
+                .PrimaryKey(t => new { t.Permission_Id, t.Role_Id })
                 .ForeignKey("dbo.Permission", t => t.Permission_Id)
                 .ForeignKey("dbo.Role", t => t.Role_Id)
                 .Index(t => t.Permission_Id)
@@ -643,7 +643,7 @@ namespace DAL.Migrations
                     Vacancy_Id = c.Int(false),
                     Tag_Id = c.Int(false)
                 })
-                .PrimaryKey(t => new {t.Vacancy_Id, t.Tag_Id})
+                .PrimaryKey(t => new { t.Vacancy_Id, t.Tag_Id })
                 .ForeignKey("dbo.Vacancy", t => t.Vacancy_Id)
                 .ForeignKey("dbo.Tag", t => t.Tag_Id)
                 .Index(t => t.Vacancy_Id)
@@ -704,58 +704,58 @@ namespace DAL.Migrations
             DropForeignKey("dbo.File", "Candidate_Id", "dbo.Candidate");
             DropForeignKey("dbo.CandidateComment", "Comment_Id", "dbo.Comment");
             DropForeignKey("dbo.CandidateComment", "Candidate_Id", "dbo.Candidate");
-            DropIndex("dbo.VacancyTag", new[] {"Tag_Id"});
-            DropIndex("dbo.VacancyTag", new[] {"Vacancy_Id"});
-            DropIndex("dbo.PermissionRole", new[] {"Role_Id"});
-            DropIndex("dbo.PermissionRole", new[] {"Permission_Id"});
-            DropIndex("dbo.UserPhoneNumber", new[] {"PhoneNumber_Id"});
-            DropIndex("dbo.UserPhoneNumber", new[] {"User_Id"});
-            DropIndex("dbo.VacancySkill", new[] {"Skill_Id"});
-            DropIndex("dbo.VacancySkill", new[] {"Vacancy_Id"});
-            DropIndex("dbo.VacancyLocation", new[] {"Location_Id"});
-            DropIndex("dbo.VacancyLocation", new[] {"Vacancy_Id"});
-            DropIndex("dbo.VacancyLevel", new[] {"Level_Id"});
-            DropIndex("dbo.VacancyLevel", new[] {"Vacancy_Id"});
-            DropIndex("dbo.VacancyComment", new[] {"Comment_Id"});
-            DropIndex("dbo.VacancyComment", new[] {"Vacancy_Id"});
-            DropIndex("dbo.CandidateTag", new[] {"Tag_Id"});
-            DropIndex("dbo.CandidateTag", new[] {"Candidate_Id"});
-            DropIndex("dbo.CandidateSkill", new[] {"Skill_Id"});
-            DropIndex("dbo.CandidateSkill", new[] {"Candidate_Id"});
-            DropIndex("dbo.CandidatePhoneNumber", new[] {"PhoneNumber_Id"});
-            DropIndex("dbo.CandidatePhoneNumber", new[] {"Candidate_Id"});
-            DropIndex("dbo.CandidateLanguageSkill", new[] {"LanguageSkill_Id"});
-            DropIndex("dbo.CandidateLanguageSkill", new[] {"Candidate_Id"});
-            DropIndex("dbo.CandidateComment", new[] {"Comment_Id"});
-            DropIndex("dbo.CandidateComment", new[] {"Candidate_Id"});
-            DropIndex("dbo.Event", new[] {"Vacancy_Id"});
-            DropIndex("dbo.Event", new[] {"Candidate_Id"});
-            DropIndex("dbo.Event", new[] {"ResponsibleId"});
-            DropIndex("dbo.Event", new[] {"EventTypeId"});
-            DropIndex("dbo.VacancyStage", new[] {"StageId"});
-            DropIndex("dbo.User", new[] {"Photo_Id"});
-            DropIndex("dbo.User", new[] {"LocationId"});
-            DropIndex("dbo.User", new[] {"RoleId"});
-            DropIndex("dbo.Department", new[] {"DepartmentGroupId"});
-            DropIndex("dbo.Vacancy", new[] {"LanguageSkill_Id"});
-            DropIndex("dbo.Vacancy", new[] {"ResponsibleId"});
-            DropIndex("dbo.Vacancy", new[] {"DepartmentId"});
-            DropIndex("dbo.Vacancy", new[] {"IndustryId"});
-            DropIndex("dbo.Vacancy", new[] {"ParentVacancyId"});
-            DropIndex("dbo.VacancyStageInfo", new[] {"VacancyStage_Id"});
-            DropIndex("dbo.VacancyStageInfo", new[] {"Comment_Id"});
-            DropIndex("dbo.VacancyStageInfo", new[] {"VacancyId"});
-            DropIndex("dbo.VacancyStageInfo", new[] {"CandidateId"});
-            DropIndex("dbo.CandidateSource", new[] {"Candidate_Id"});
-            DropIndex("dbo.CandidateSocial", new[] {"CandidateId"});
-            DropIndex("dbo.CandidateSocial", new[] {"SocialNetworkId"});
-            DropIndex("dbo.Location", new[] {"CountryId"});
-            DropIndex("dbo.LanguageSkill", new[] {"LanguageId"});
-            DropIndex("dbo.File", new[] {"Vacancy_Id"});
-            DropIndex("dbo.File", new[] {"Candidate_Id"});
-            DropIndex("dbo.Candidate", new[] {"Photo_Id"});
-            DropIndex("dbo.Candidate", new[] {"IndustryId"});
-            DropIndex("dbo.Candidate", new[] {"LocationId"});
+            DropIndex("dbo.VacancyTag", new[] { "Tag_Id" });
+            DropIndex("dbo.VacancyTag", new[] { "Vacancy_Id" });
+            DropIndex("dbo.PermissionRole", new[] { "Role_Id" });
+            DropIndex("dbo.PermissionRole", new[] { "Permission_Id" });
+            DropIndex("dbo.UserPhoneNumber", new[] { "PhoneNumber_Id" });
+            DropIndex("dbo.UserPhoneNumber", new[] { "User_Id" });
+            DropIndex("dbo.VacancySkill", new[] { "Skill_Id" });
+            DropIndex("dbo.VacancySkill", new[] { "Vacancy_Id" });
+            DropIndex("dbo.VacancyLocation", new[] { "Location_Id" });
+            DropIndex("dbo.VacancyLocation", new[] { "Vacancy_Id" });
+            DropIndex("dbo.VacancyLevel", new[] { "Level_Id" });
+            DropIndex("dbo.VacancyLevel", new[] { "Vacancy_Id" });
+            DropIndex("dbo.VacancyComment", new[] { "Comment_Id" });
+            DropIndex("dbo.VacancyComment", new[] { "Vacancy_Id" });
+            DropIndex("dbo.CandidateTag", new[] { "Tag_Id" });
+            DropIndex("dbo.CandidateTag", new[] { "Candidate_Id" });
+            DropIndex("dbo.CandidateSkill", new[] { "Skill_Id" });
+            DropIndex("dbo.CandidateSkill", new[] { "Candidate_Id" });
+            DropIndex("dbo.CandidatePhoneNumber", new[] { "PhoneNumber_Id" });
+            DropIndex("dbo.CandidatePhoneNumber", new[] { "Candidate_Id" });
+            DropIndex("dbo.CandidateLanguageSkill", new[] { "LanguageSkill_Id" });
+            DropIndex("dbo.CandidateLanguageSkill", new[] { "Candidate_Id" });
+            DropIndex("dbo.CandidateComment", new[] { "Comment_Id" });
+            DropIndex("dbo.CandidateComment", new[] { "Candidate_Id" });
+            DropIndex("dbo.Event", new[] { "Vacancy_Id" });
+            DropIndex("dbo.Event", new[] { "Candidate_Id" });
+            DropIndex("dbo.Event", new[] { "ResponsibleId" });
+            DropIndex("dbo.Event", new[] { "EventTypeId" });
+            DropIndex("dbo.VacancyStage", new[] { "StageId" });
+            DropIndex("dbo.User", new[] { "Photo_Id" });
+            DropIndex("dbo.User", new[] { "LocationId" });
+            DropIndex("dbo.User", new[] { "RoleId" });
+            DropIndex("dbo.Department", new[] { "DepartmentGroupId" });
+            DropIndex("dbo.Vacancy", new[] { "LanguageSkill_Id" });
+            DropIndex("dbo.Vacancy", new[] { "ResponsibleId" });
+            DropIndex("dbo.Vacancy", new[] { "DepartmentId" });
+            DropIndex("dbo.Vacancy", new[] { "IndustryId" });
+            DropIndex("dbo.Vacancy", new[] { "ParentVacancyId" });
+            DropIndex("dbo.VacancyStageInfo", new[] { "VacancyStage_Id" });
+            DropIndex("dbo.VacancyStageInfo", new[] { "Comment_Id" });
+            DropIndex("dbo.VacancyStageInfo", new[] { "VacancyId" });
+            DropIndex("dbo.VacancyStageInfo", new[] { "CandidateId" });
+            DropIndex("dbo.CandidateSource", new[] { "Candidate_Id" });
+            DropIndex("dbo.CandidateSocial", new[] { "CandidateId" });
+            DropIndex("dbo.CandidateSocial", new[] { "SocialNetworkId" });
+            DropIndex("dbo.Location", new[] { "CountryId" });
+            DropIndex("dbo.LanguageSkill", new[] { "LanguageId" });
+            DropIndex("dbo.File", new[] { "Vacancy_Id" });
+            DropIndex("dbo.File", new[] { "Candidate_Id" });
+            DropIndex("dbo.Candidate", new[] { "Photo_Id" });
+            DropIndex("dbo.Candidate", new[] { "IndustryId" });
+            DropIndex("dbo.Candidate", new[] { "LocationId" });
             DropTable("dbo.VacancyTag");
             DropTable("dbo.PermissionRole");
             DropTable("dbo.UserPhoneNumber");

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using BaseOfTalents.DAL.Infrastructure;
+using BaseOfTalents.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using DAL.Infrastructure;
-using Domain.Entities;
 
-namespace DAL.Repositories
+namespace BaseOfTalents.DAL.Repositories
 {
     public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
     {
@@ -32,7 +32,7 @@ namespace DAL.Repositories
             }
 
             foreach (var includeProperty in includeProperties.Split
-                (new[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                (new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(includeProperty);
             }
@@ -41,7 +41,10 @@ namespace DAL.Repositories
             {
                 return orderBy(query).ToList();
             }
-            return query.ToList();
+            return query
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
         }
 
         public virtual TEntity GetByID(object id)

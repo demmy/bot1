@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Enum.Setup;
+﻿using BaseOfTalents.Domain.Entities.Enum.Setup;
 
-namespace Domain.Entities
+namespace BaseOfTalents.Domain.Entities
 {
     public class CandidateSocial : BaseEntity
     {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BaseOfTalents.Domain.Entities;
+using BaseOfTalents.Domain.Entities.Enum;
+using BaseOfTalents.Domain.Entities.Enum.Setup;
+using System;
 using System.Collections.Generic;
-using Domain.Entities;
-using Domain.Entities.Enum;
-using Domain.Entities.Enum.Setup;
 
-namespace DAL.DTO
+namespace BaseOfTalents.DAL.DTO
 {
     public class VacancyDTO
     {

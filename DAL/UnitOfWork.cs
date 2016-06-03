@@ -1,17 +1,14 @@
-﻿using System.Data.Entity;
-using DAL.Infrastructure;
-using DAL.Repositories;
+﻿using BaseOfTalents.DAL.Infrastructure;
+using BaseOfTalents.DAL.Repositories;
+using System.Data.Entity;
 
-namespace DAL
+namespace BaseOfTalents.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private ICandidateRepository candidateRepo;
+        
         private readonly DbContext context;
-        private IFileRepository fileRepo;
 
-        private IUserRepository userRepo;
-        private IVacancyRepository vacancyRepo;
 
         public UnitOfWork(DbContext context)
         {
@@ -74,6 +71,11 @@ namespace DAL
                 return vacancyRepo;
             }
         }
+
+        private IFileRepository fileRepo;
+        private ICandidateRepository candidateRepo;
+        private IUserRepository userRepo;
+        private IVacancyRepository vacancyRepo;
 
         public void Commit()
         {

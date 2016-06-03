@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace DAL.Extensions
+namespace BaseOfTalents.DAL.Extensions
 {
     public class PagedList<T> : IPagedList<T>
     {
@@ -27,7 +27,7 @@ namespace DAL.Extensions
 
         IList IPagedList.List
         {
-            get { return (IList) List; }
+            get { return (IList)List; }
         }
     }
 }

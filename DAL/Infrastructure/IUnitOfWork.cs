@@ -1,4 +1,4 @@
-﻿namespace DAL.Infrastructure
+﻿namespace BaseOfTalents.DAL.Infrastructure
 {
     public interface IUnitOfWork
     {
@@ -6,6 +6,7 @@
         IVacancyRepository VacancyRepo { get; }
         ICandidateRepository CandidateRepo { get; }
         IFileRepository FileRepo { get; }
+
         void Commit();
     }
 }

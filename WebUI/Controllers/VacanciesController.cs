@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-using System.Web.Http.Results;
-using DAL.DTO;
-using DAL.Services;
+﻿using BaseOfTalents.DAL.Services;
+using BaseOfTalents.WebUI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Results;
 
-namespace WebUI.Controllers
+namespace BaseOfTalents.WebUI.Controllers
 {
     [RoutePrefix("api/vacancies")]
     public class VacanciesController : ApiController
@@ -22,12 +22,9 @@ namespace WebUI.Controllers
         // GET api/<controller>
         [HttpGet]
         [Route]
-        public JsonResult<IEnumerable<VacancyDTO>> Get()
+        public JsonResult<IEnumerable<VacancyModel>> Get()
         {
-            var list = service.Get(1, 20);
-
-
-            return Json(list, BOT_SERIALIZER_SETTINGS);
+            return null;
         }
 
         // GET api/<controller>/5

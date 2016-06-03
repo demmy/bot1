@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using BaseOfTalents.Domain.Entities;
 
-namespace DAL.Infrastructure
+namespace BaseOfTalents.DAL.Infrastructure
 {
     public interface IEventRepository : IRepository<Event>
     {

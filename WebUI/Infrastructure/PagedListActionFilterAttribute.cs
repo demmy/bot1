@@ -1,9 +1,9 @@
-﻿using System.Globalization;
+﻿using BaseOfTalents.DAL.Extensions;
+using System.Globalization;
 using System.Net.Http;
 using System.Web.Http.Filters;
-using DAL.Extensions;
 
-namespace WebUI.Infrastructure
+namespace BaseOfTalents.WebUI.Infrastructure
 {
     public class PagedListActionFilterAttribute : ActionFilterAttribute
     {

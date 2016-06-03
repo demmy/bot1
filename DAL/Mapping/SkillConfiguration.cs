@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Enum.Setup;
+﻿using BaseOfTalents.Domain.Entities.Enum.Setup;
 
-namespace DAL.Mapping
+namespace BaseOfTalents.DAL.Mapping
 {
     public class SkillConfiguration : BaseEntityConfiguration<Skill>
     {

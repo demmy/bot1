@@ -1,7 +1,7 @@
-﻿using System.Web.Http;
-using Autofac;
+﻿using Autofac;
+using System.Web.Http;
 
-namespace WebUI
+namespace BaseOfTalents.WebUI
 {
     internal static class Bootstrapper
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace DAL.Extensions
+namespace BaseOfTalents.DAL.Extensions
 {
     public interface IPagedList
     {

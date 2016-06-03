@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Enum;
+﻿using BaseOfTalents.Domain.Entities.Enum;
 
-namespace Domain.Entities
+namespace BaseOfTalents.Domain.Entities
 {
     public class CandidateSource : BaseEntity
     {

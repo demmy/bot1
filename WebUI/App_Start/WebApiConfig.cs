@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace WebUI
+namespace BaseOfTalents.WebUI
 {
     public static class WebApiConfig
     {

@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Enum.Setup;
+﻿using BaseOfTalents.Domain.Entities.Enum.Setup;
 
-namespace DAL.Infrastructure
+namespace BaseOfTalents.DAL.Infrastructure
 {
     public interface ISocialNetworkRepository : IRepository<SocialNetwork>
     {

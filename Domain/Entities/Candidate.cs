@@ -1,9 +1,9 @@
+using BaseOfTalents.Domain.Entities.Enum;
+using BaseOfTalents.Domain.Entities.Enum.Setup;
 using System;
 using System.Collections.Generic;
-using Domain.Entities.Enum;
-using Domain.Entities.Enum.Setup;
 
-namespace Domain.Entities
+namespace BaseOfTalents.Domain.Entities
 {
     public class Candidate : BaseEntity
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DAL.Extensions
+namespace BaseOfTalents.DAL.Extensions
 {
     public static class ListExtensions
     {
@@ -20,7 +20,7 @@ namespace DAL.Extensions
             int pageSize)
         {
             var collection = items
-                .Skip(pageIndex*pageSize)
+                .Skip(pageIndex * pageSize)
                 .Take(pageSize)
                 .ToArray();
             return new PagedList<T>(collection, pageIndex, pageSize, items.Count);

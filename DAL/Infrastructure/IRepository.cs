@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BaseOfTalents.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Domain.Entities;
 
-namespace DAL.Infrastructure
+namespace BaseOfTalents.DAL.Infrastructure
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : BaseEntity
     {

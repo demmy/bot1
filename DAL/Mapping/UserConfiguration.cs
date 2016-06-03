@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
+﻿using BaseOfTalents.Domain.Entities;
 
-namespace DAL.Mapping
+namespace BaseOfTalents.DAL.Mapping
 {
     public class UserConfiguration : BaseEntityConfiguration<User>
     {

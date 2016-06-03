@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using BaseOfTalents.DAL.DTO;
+using BaseOfTalents.DAL.Infrastructure;
+using System.Collections.Generic;
 using System.Linq;
-using DAL.DTO;
-using DAL.Infrastructure;
 
-namespace DAL.Services
+namespace BaseOfTalents.DAL.Services
 {
     public class VacancyService
     {

@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities
+﻿namespace BaseOfTalents.Domain.Entities
 {
     public class VacancyStageInfo : BaseEntity
     {

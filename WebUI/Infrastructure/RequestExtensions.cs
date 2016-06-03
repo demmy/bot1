@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 
-namespace WebUI.Infrastructure
+namespace BaseOfTalents.WebUI.Infrastructure
 {
     public static class RequestExtensions
     {

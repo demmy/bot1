@@ -1,11 +1,13 @@
-﻿using System;
+﻿
+
+using BaseOfTalents.Domain.Entities;
+using BaseOfTalents.Domain.Entities.Enum;
+using BaseOfTalents.Domain.Entities.Enum.Setup;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Entities;
-using Domain.Entities.Enum;
-using Domain.Entities.Enum.Setup;
 
-namespace DAL.Migrations
+namespace BaseOfTalents.DAL.Migrations
 {
     public static class DummyData
     {
@@ -373,7 +375,6 @@ namespace DAL.Migrations
             }
         };
 
-
         public static List<User> Users;
 
         public static List<Role> Roles;
@@ -570,7 +571,7 @@ namespace DAL.Migrations
                         Login = GetRandomString(4),
                         MiddleName = names.GetRandom(),
                         Password = GetRandomString(8),
-                        PhoneNumbers = new List<PhoneNumber> {new PhoneNumber {Number = GetRandomNumbers(7)}},
+                        PhoneNumbers = new List<PhoneNumber> { new PhoneNumber { Number = GetRandomNumbers(7) } },
                         Photo = Photos.GetRandom(),
                         Role = Roles.GetRandom(),
                         Skype = GetRandomString(8)
@@ -655,10 +656,10 @@ namespace DAL.Migrations
                     LastName = lastNames.GetRandom(),
                     MiddleName = names.GetRandom(),
                     PhoneNumbers =
-                        Enumerable.Repeat(new PhoneNumber {Number = GetRandomNumbers(7)}, RandomNumber(0, 5))
+                        Enumerable.Repeat(new PhoneNumber { Number = GetRandomNumbers(7) }, RandomNumber(0, 5))
                             .Distinct()
                             .ToList(),
-                    Photo = new Photo {Description = GetRandomString(25), ImagePath = GetRandomNumbers(25)},
+                    Photo = new Photo { Description = GetRandomString(25), ImagePath = GetRandomNumbers(25) },
                     PositionDesired = professons.GetRandom(),
                     Practice = GetRandomString(20),
                     RelocationAgreement = true,
@@ -719,7 +720,6 @@ namespace DAL.Migrations
 
         //Function to get random number
 
-
         public static int RandomNumber(int min, int max)
         {
             lock (syncLock)
@@ -729,6 +729,6 @@ namespace DAL.Migrations
             }
         }
 
-        #endregion
+        #endregion randomizer
     }
 }
