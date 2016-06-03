@@ -1,10 +1,11 @@
-﻿using System.Web;
+﻿using BaseOfTalents.WebUI;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace BaseOfTalents.WebUI
+namespace WebUI
 {
     public class WebApiApplication : HttpApplication
     {
@@ -17,7 +18,7 @@ namespace BaseOfTalents.WebUI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //DI
-            Bootstrapper.Run();
+            //Bootstrapper.Run();
         }
     }
 }

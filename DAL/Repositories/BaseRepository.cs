@@ -13,6 +13,8 @@ namespace BaseOfTalents.DAL.Repositories
         internal DbContext context;
         internal DbSet<TEntity> dbSet;
 
+        private Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> defaultOrder = d => d.OrderByDescending(s => s.LastModified);
+
         public BaseRepository(DbContext context)
         {
             this.context = context;
@@ -26,6 +28,8 @@ namespace BaseOfTalents.DAL.Repositories
         {
             IQueryable<TEntity> query = dbSet;
 
+            orderBy = orderBy ?? defaultOrder;
+
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -36,12 +40,8 @@ namespace BaseOfTalents.DAL.Repositories
             {
                 query = query.Include(includeProperty);
             }
-
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            return query
+            
+            return orderBy(query)
                 .Skip(page * pageSize)
                 .Take(pageSize)
                 .ToList();
@@ -82,5 +82,7 @@ namespace BaseOfTalents.DAL.Repositories
         {
             context.Dispose();
         }
+
+        
     }
 }

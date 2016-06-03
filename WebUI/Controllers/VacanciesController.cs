@@ -3,12 +3,13 @@ using BaseOfTalents.WebUI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Results;
 
 namespace BaseOfTalents.WebUI.Controllers
 {
-    [RoutePrefix("api/vacancies")]
+    [RoutePrefix("api/vacancy")]
     public class VacanciesController : ApiController
     {
         protected static JsonSerializerSettings BOT_SERIALIZER_SETTINGS = new JsonSerializerSettings
@@ -21,10 +22,27 @@ namespace BaseOfTalents.WebUI.Controllers
 
         // GET api/<controller>
         [HttpGet]
-        [Route]
-        public JsonResult<IEnumerable<VacancyModel>> Get()
+        [Route("")]
+        public IEnumerable<VacancyModel> Get([FromUri]int page=1, int size=3)
         {
-            return null;
+            var resp = service.Get(page, size);
+            var re = resp.Select(dto =>
+                new VacancyModel
+                {
+                    DeadlineDate = dto.DeadlineDate,
+                    DepartmentId = dto.Department.Id,
+                    Description = dto.Description,
+                    EndDate = dto.EndDate,
+                    IndustryId = dto.Industry.Id,
+                    LevelIds = dto.Levels.Select(x=>x.Id),
+                    LocationIds = dto.Locations.Select(x=>x.Id),
+                    ParentVacancyId = dto.ParentVacancy.Id,
+                    ResponsibleId = dto.Responsible.Id,
+                    RequiredSkillIds = dto.RequiredSkills.Select(x => x.Id)
+
+                }
+                );
+            return re;
         }
 
         // GET api/<controller>/5

@@ -28,13 +28,13 @@ namespace BaseOfTalents.DAL.DTO
         public DateTime? EndDate { get; set; }
         public DateTime? DeadlineDate { get; set; }
 
-        public ICollection<Level> Levels { get; set; }
-        public ICollection<Location> Locations { get; set; }
-        public ICollection<Skill> RequiredSkills { get; set; }
-        public ICollection<VacancyStageInfo> CandidatesProgress { get; set; }
-        public ICollection<File> Files { get; set; }
-        public ICollection<Comment> Comments { get; set; }
-        public ICollection<Tag> Tags { get; set; }
+        public IEnumerable<Level> Levels { get; set; }
+        public IEnumerable<Location> Locations { get; set; }
+        public IEnumerable<Skill> RequiredSkills { get; set; }
+        public IEnumerable<VacancyStageInfo> CandidatesProgress { get; set; }
+        public IEnumerable<File> Files { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
 
         public Vacancy ParentVacancy { get; set; }
 
