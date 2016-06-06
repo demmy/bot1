@@ -139,6 +139,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\VacanciesController.cs" />
+    <Compile Include="Models\CandidateProgressModel.cs" />
+    <Compile Include="Extensions\DTOModelConverter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
