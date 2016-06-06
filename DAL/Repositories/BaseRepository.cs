@@ -22,7 +22,7 @@ namespace BaseOfTalents.DAL.Repositories
         }
 
         public virtual IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
+            IEnumerable<Expression<Func<TEntity, bool>>> filters = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "", int page = 1, int pageSize = 20)
         {
@@ -30,9 +30,12 @@ namespace BaseOfTalents.DAL.Repositories
 
             orderBy = orderBy ?? defaultOrder;
 
-            if (filter != null)
+            if (filters != null)
             {
-                query = query.Where(filter);
+                foreach (var filter in filters)
+                {
+                    query = query.Where(filter);
+                }
             }
 
             foreach (var includeProperty in includeProperties.Split

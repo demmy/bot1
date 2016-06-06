@@ -34,36 +34,37 @@ namespace BaseOfTalents.DAL.Services
             int current, 
             int size)
         {
-            Expression<Func<Vacancy, bool>> filter = v => true;
+            var filters = new List<Expression<Func<Vacancy, bool>>>();
+
             if(userId.HasValue)
             {
-                filter = filter.AndAlso(x => x.ResponsibleId == userId);
+                filters.Add(x => x.ResponsibleId == userId);
             }
             if(industryId.HasValue)
             {
-                filter = filter.AndAlso(x => x.IndustryId == industryId);
+                filters.Add(x => x.IndustryId == industryId);
             }
             if(!String.IsNullOrEmpty(title)) 
             {
-                filter = filter.AndAlso(x => x.Title.StartsWith(title));
+                filters.Add(x => x.Title.StartsWith(title));
             }
             if(vacancyState.HasValue)
             {
-                filter = filter.AndAlso(x => (int) x.State == vacancyState);
+                filters.Add(x => (int) x.State == vacancyState);
             }
             if(typeOfEmployment.HasValue)
             {
-                filter = filter.AndAlso(x => (int)x.TypeOfEmployment == typeOfEmployment);
+                filters.Add(x => (int)x.TypeOfEmployment == typeOfEmployment);
             }
             if(levelIds.Any())
             {
-                filter = filter.AndAlso(x => x.Levels.Any(l => levelIds.Contains(l.Id)));
+                filters.Add(x => x.Levels.Any(l => levelIds.Contains(l.Id)));
             }
             if(locationIds.Any())
             {
-                filter = filter.AndAlso(x => x.Locations.Any(loc => locationIds.Contains(loc.Id)));
+                filters.Add(x => x.Locations.Any(loc => locationIds.Contains(loc.Id)));
             }
-            var www = uow.VacancyRepo.Get(filter, page: current, pageSize: size);
+            var www = uow.VacancyRepo.Get(filters, page: current, pageSize: size);
             return null;
         }
 

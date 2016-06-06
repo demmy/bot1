@@ -9,7 +9,7 @@ namespace BaseOfTalents.DAL.Infrastructure
     public interface IRepository<TEntity> : IDisposable where TEntity : BaseEntity
     {
         IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
+            IEnumerable<Expression<Func<TEntity, bool>>> filters = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "",
             int page = 1,
