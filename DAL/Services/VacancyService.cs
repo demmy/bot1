@@ -1,6 +1,6 @@
 ﻿using BaseOfTalents.DAL.Infrastructure;
 using BaseOfTalents.Domain.Entities;
-using DAL.Extensions;
+using DAL.Services;
 using Domain.DTO.DTOModels;
 using System;
 using System.Collections.Generic;
@@ -38,7 +38,7 @@ namespace BaseOfTalents.DAL.Services
 
             if(userId.HasValue)
             {
-                filters.Add(x => x.ResponsibleId == userId);
+                filters.Add(x => x.Responsible.Id == userId);
             }
             if(industryId.HasValue)
             {
@@ -64,10 +64,9 @@ namespace BaseOfTalents.DAL.Services
             {
                 filters.Add(x => x.Locations.Any(loc => locationIds.Contains(loc.Id)));
             }
-            var www = uow.VacancyRepo.Get(filters, page: current, pageSize: size);
-            return null;
+            return uow.VacancyRepo
+                .Get(filters, page: current, pageSize: size)
+                .Select(x => DTOService.ToDTO<Vacancy, VacancyDTO>(x));
         }
-
-
     }
 }
