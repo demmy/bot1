@@ -54,7 +54,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BOTContext.cs" />
+    <Compile Include="DTO\BaseEntityDTO.cs" />
+    <Compile Include="DTO\CandidateDTO.cs" />
+    <Compile Include="DTO\CandidateSocialDTO.cs" />
+    <Compile Include="DTO\CandidateSourceDTO.cs" />
+    <Compile Include="DTO\CommentDTO.cs" />
+    <Compile Include="DTO\EventDTO.cs" />
+    <Compile Include="DTO\FileDTO.cs" />
+    <Compile Include="DTO\LanguageSkillDTO.cs" />
+    <Compile Include="DTO\PermissionDTO.cs" />
+    <Compile Include="DTO\PhoneNumberDTO.cs" />
+    <Compile Include="DTO\PhotoDTO.cs" />
+    <Compile Include="DTO\RoleDTO.cs" />
+    <Compile Include="DTO\SetupDTO\CountryDTO.cs" />
+    <Compile Include="DTO\SetupDTO\CurrencyDTO.cs" />
+    <Compile Include="DTO\SetupDTO\DepartmentDTO.cs" />
+    <Compile Include="DTO\SetupDTO\DepartmentGroupDTO.cs" />
+    <Compile Include="DTO\SetupDTO\EventTypeDTO.cs" />
+    <Compile Include="DTO\SetupDTO\IndustryDTO.cs" />
+    <Compile Include="DTO\SetupDTO\LanguageDTO.cs" />
+    <Compile Include="DTO\SetupDTO\LevelDTO.cs" />
+    <Compile Include="DTO\SetupDTO\LocationDTO.cs" />
+    <Compile Include="DTO\SetupDTO\SkillDTO.cs" />
+    <Compile Include="DTO\SetupDTO\SocialNetworkDTO.cs" />
+    <Compile Include="DTO\SetupDTO\StageDTO.cs" />
+    <Compile Include="DTO\SetupDTO\TagDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\VacancyDTO.cs" />
+    <Compile Include="DTO\VacancyStageDTO.cs" />
+    <Compile Include="DTO\VacancyStageInfoDTO.cs" />
+    <Compile Include="Extensions\ExpressionExtension.cs" />
     <Compile Include="Extensions\IPagedList.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\PagedList.cs" />
@@ -109,9 +138,9 @@
     <Compile Include="Mapping\VacancyConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageInfoConfiguration.cs" />
-    <Compile Include="Migrations\201606021134367_init.cs" />
-    <Compile Include="Migrations\201606021134367_init.Designer.cs">
-      <DependentUpon>201606021134367_init.cs</DependentUpon>
+    <Compile Include="Migrations\201606060955597_init.cs" />
+    <Compile Include="Migrations\201606060955597_init.Designer.cs">
+      <DependentUpon>201606060955597_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DummyData.cs" />
@@ -143,10 +172,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606021134367_init.resx">
-      <DependentUpon>201606021134367_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606060955597_init.resx">
+      <DependentUpon>201606060955597_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

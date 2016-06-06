@@ -148,6 +148,8 @@
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Models\LanguageSkillModel.cs" />
     <Compile Include="Models\VacancyModel.cs" />
+    <Compile Include="Models\VacancySearchModel.cs" />
+    <Compile Include="Models\VacancySearchParameters.cs" />
     <Compile Include="Models\VacancyStageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

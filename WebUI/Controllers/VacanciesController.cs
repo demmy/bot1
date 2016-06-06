@@ -21,28 +21,25 @@ namespace BaseOfTalents.WebUI.Controllers
         private readonly VacancyService service = new VacancyService();
 
         // GET api/<controller>
-        [HttpGet]
-        [Route("")]
-        public IEnumerable<VacancyModel> Get([FromUri]int page=1, int size=3)
+        [HttpPost]
+        [Route("search")]
+        public IHttpActionResult Get([FromBody]VacancySearchParameters vacancyParams)
         {
-            var resp = service.Get(page, size);
-            var re = resp.Select(dto =>
-                new VacancyModel
-                {
-                    DeadlineDate = dto.DeadlineDate,
-                    DepartmentId = dto.Department.Id,
-                    Description = dto.Description,
-                    EndDate = dto.EndDate,
-                    IndustryId = dto.Industry.Id,
-                    LevelIds = dto.Levels.Select(x=>x.Id),
-                    LocationIds = dto.Locations.Select(x=>x.Id),
-                    ParentVacancyId = dto.ParentVacancy.Id,
-                    ResponsibleId = dto.Responsible.Id,
-                    RequiredSkillIds = dto.RequiredSkills.Select(x => x.Id)
-
-                }
-                );
-            return re;
+            if(ModelState.IsValid)
+            {
+                var resp = service.Get(
+                    vacancyParams.UserId, 
+                    vacancyParams.IndustryId, 
+                    vacancyParams.Title, 
+                    vacancyParams.VacancyState, 
+                    vacancyParams.TypeOfEmployment, 
+                    vacancyParams.LevelIds, 
+                    vacancyParams.LocationIds, 
+                    vacancyParams.Current, 
+                    vacancyParams.Size);
+                return Json(resp);
+            }
+            return BadRequest();
         }
 
         // GET api/<controller>/5
