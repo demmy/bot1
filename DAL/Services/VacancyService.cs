@@ -46,7 +46,7 @@ namespace BaseOfTalents.DAL.Services
             }
             if(!String.IsNullOrEmpty(title)) 
             {
-                filters.Add(x => x.Title.StartsWith(title));
+                filters.Add(x => x.Title.ToLower().Contains(title.ToLower()));
             }
             if(vacancyState.HasValue)
             {

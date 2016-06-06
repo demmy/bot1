@@ -15,6 +15,6 @@ namespace BaseOfTalents.Domain.Entities
         public DateTime? CreatedOn { get; set; }
         public EntityState State { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
     }
 }

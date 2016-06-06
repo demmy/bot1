@@ -11,7 +11,7 @@ namespace BaseOfTalents.WebUI.Models
         {
             LevelIds = new List<int>();
             LocationIds = new List<int>();
-            Current = 1;
+            Current = 0;
             Size = 20;
         }
 

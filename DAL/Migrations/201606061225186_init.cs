@@ -71,7 +71,7 @@ namespace BaseOfTalents.DAL.Migrations
                         LastModified = c.DateTime(),
                         CreatedOn = c.DateTime(),
                         State = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
+                        IsDeleted = c.Boolean(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -134,7 +134,7 @@ namespace BaseOfTalents.DAL.Migrations
                         LastModified = c.DateTime(),
                         CreatedOn = c.DateTime(),
                         State = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
+                        IsDeleted = c.Boolean(),
                     })
                 .PrimaryKey(t => t.Id);
             
