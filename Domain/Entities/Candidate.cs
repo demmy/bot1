@@ -45,6 +45,9 @@ namespace BaseOfTalents.Domain.Entities
         public virtual Industry Industry { get; set; }
 
         public bool RelocationAgreement { get; set; }
+        public int? RelocationPlaceId { get; set; }
+        public Location RelocationPlace { get; set; }
+
         public string Education { get; set; }
 
         public virtual ICollection<CandidateSocial> SocialNetworks { get; set; }
