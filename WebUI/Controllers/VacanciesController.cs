@@ -1,5 +1,7 @@
 ﻿using BaseOfTalents.DAL.Services;
 using BaseOfTalents.WebUI.Models;
+using DAL.Services;
+using Domain.DTO.DTOModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
@@ -27,7 +29,7 @@ namespace BaseOfTalents.WebUI.Controllers
         {
             if(ModelState.IsValid)
             {
-                var resp = service.Get(
+                var searchResult = service.Get(
                     vacancyParams.UserId, 
                     vacancyParams.IndustryId, 
                     vacancyParams.Title, 
@@ -36,8 +38,8 @@ namespace BaseOfTalents.WebUI.Controllers
                     vacancyParams.LevelIds, 
                     vacancyParams.LocationIds, 
                     vacancyParams.Current, 
-                    vacancyParams.Size);
-                return Json(resp);
+                    vacancyParams.Size).Select(x=> DTOService.ToViewModel<VacancyDTO, VacancySearchModel>(x));
+                return Json(searchResult, BOT_SERIALIZER_SETTINGS);
             }
             return BadRequest();
         }
