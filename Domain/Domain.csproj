@@ -50,6 +50,7 @@
     <Compile Include="Entities\Enum\EntityState.cs" />
     <Compile Include="Entities\Enum\LanguageLevel.cs" />
     <Compile Include="Entities\Enum\Setup\Country.cs" />
+    <Compile Include="Entities\Enum\Setup\Currency.cs" />
     <Compile Include="Entities\Enum\Setup\Department.cs" />
     <Compile Include="Entities\Enum\Setup\DepartmentGroup.cs" />
     <Compile Include="Entities\Enum\Setup\EventType.cs" />
