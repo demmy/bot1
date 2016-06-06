@@ -1,5 +1,6 @@
 using BaseOfTalents.Domain.Entities.Enum;
 using BaseOfTalents.Domain.Entities.Enum.Setup;
+using Domain.Entities.Enum.Setup;
 using System;
 using System.Collections.Generic;
 
@@ -28,11 +29,14 @@ namespace BaseOfTalents.Domain.Entities
         public string Email { get; set; }
         public string Skype { get; set; }
         public string PositionDesired { get; set; }
-        public int SalaryDesired { get; set; }
         public TypeOfEmployment TypeOfEmployment { get; set; }
         public DateTime StartExperience { get; set; }
         public string Practice { get; set; }
         public string Description { get; set; }
+
+        public int SalaryDesired { get; set; }
+        public int CurrencyId { get; set; }
+        public virtual Currency Currency { get; set; }
 
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }

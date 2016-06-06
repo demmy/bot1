@@ -18,6 +18,8 @@ namespace BaseOfTalents.DAL.Mapping
 
             HasOptional(c => c.Industry).WithMany().HasForeignKey(x => x.IndustryId);
 
+            HasRequired(c => c.Currency).WithMany().HasForeignKey(c => c.CurrencyId);
+
             HasRequired(c => c.Location).WithMany().HasForeignKey(c => c.LocationId);
             HasMany(c => c.Files);
             HasMany(c => c.VacanciesProgress).WithRequired(vs => vs.Candidate).HasForeignKey(vs => vs.CandidateId);
