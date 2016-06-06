@@ -35,7 +35,7 @@ namespace BaseOfTalents.Domain.Entities
         public string Description { get; set; }
 
         public int SalaryDesired { get; set; }
-        public int CurrencyId { get; set; }
+        public int? CurrencyId { get; set; }
         public virtual Currency Currency { get; set; }
 
         public int LocationId { get; set; }

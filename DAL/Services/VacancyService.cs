@@ -1,7 +1,11 @@
-﻿using BaseOfTalents.DAL.DTO;
-using BaseOfTalents.DAL.Infrastructure;
+﻿using BaseOfTalents.DAL.Infrastructure;
+using BaseOfTalents.Domain.Entities;
+using DAL.Extensions;
+using Domain.DTO.DTOModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BaseOfTalents.DAL.Services
 {
@@ -19,34 +23,50 @@ namespace BaseOfTalents.DAL.Services
             this.uow = uow;
         }
 
-        public IEnumerable<VacancyDTO> Get(int page, int pageSize)
+        public IEnumerable<VacancyDTO> Get(
+            int? userId,
+            int? industryId, 
+            string title, 
+            int? vacancyState,
+            int? typeOfEmployment,
+            IEnumerable<int> levelIds,
+            IEnumerable<int> locationIds,
+            int current, 
+            int size)
         {
-            return uow.VacancyRepo.Get(page: page, pageSize: pageSize)
-                .Select(vacancy =>
-                    new VacancyDTO
-                    {
-                        CandidatesProgress = vacancy.CandidatesProgress,
-                        Comments = vacancy.Comments,
-                        DeadlineDate = vacancy.DeadlineDate,
-                        Department = vacancy.Department,
-                        Description = vacancy.Description,
-                        EndDate = vacancy.EndDate,
-                        Files = vacancy.Files,
-                        Industry = vacancy.Industry,
-                        LanguageSkill = vacancy.LanguageSkill,
-                        Levels = vacancy.Levels,
-                        Locations = vacancy.Locations,
-                        ParentVacancy = vacancy.ParentVacancy,
-                        RequiredSkills = vacancy.RequiredSkills,
-                        Responsible = vacancy.Responsible,
-                        SalaryMax = vacancy.SalaryMax,
-                        SalaryMin = vacancy.SalaryMin,
-                        StartDate = vacancy.StartDate,
-                        Tags = vacancy.Tags,
-                        Title = vacancy.Title,
-                        TypeOfEmployment = vacancy.TypeOfEmployment
-                    }
-                );
+            Expression<Func<Vacancy, bool>> filter = v => true;
+            if(userId.HasValue)
+            {
+                filter = filter.AndAlso(x => x.ResponsibleId == userId);
+            }
+            if(industryId.HasValue)
+            {
+                filter = filter.AndAlso(x => x.IndustryId == industryId);
+            }
+            if(!String.IsNullOrEmpty(title)) 
+            {
+                filter = filter.AndAlso(x => x.Title.StartsWith(title));
+            }
+            if(vacancyState.HasValue)
+            {
+                filter = filter.AndAlso(x => (int) x.State == vacancyState);
+            }
+            if(typeOfEmployment.HasValue)
+            {
+                filter = filter.AndAlso(x => (int)x.TypeOfEmployment == typeOfEmployment);
+            }
+            if(levelIds.Any())
+            {
+                filter = filter.AndAlso(x => x.Levels.Any(l => levelIds.Contains(l.Id)));
+            }
+            if(locationIds.Any())
+            {
+                filter = filter.AndAlso(x => x.Locations.Any(loc => locationIds.Contains(loc.Id)));
+            }
+            var www = uow.VacancyRepo.Get(filter, page: current, pageSize: size);
+            return null;
         }
+
+
     }
 }

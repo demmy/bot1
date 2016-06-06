@@ -1,22 +1,19 @@
-﻿using BaseOfTalents.Domain.Entities;
-using BaseOfTalents.Domain.Entities.Enum;
-using BaseOfTalents.Domain.Entities.Enum.Setup;
+﻿using BaseOfTalents.Domain.Entities.Enum;
 using System;
 using System.Collections.Generic;
 
-namespace BaseOfTalents.DAL.DTO
+namespace Domain.DTO.DTOModels
 {
-    public class VacancyDTO
+    public class VacancyDTO : BaseEntityDTO
     {
         public VacancyDTO()
         {
-            Levels = new List<Level>();
-            Locations = new List<Location>();
-            RequiredSkills = new List<Skill>();
-            CandidatesProgress = new List<VacancyStageInfo>();
-            Files = new List<File>();
-            Comments = new List<Comment>();
-            Tags = new List<Tag>();
+            LevelIds = new List<int>();
+            LocationIds = new List<int>();
+            RequiredSkillIds = new List<int>();
+            TagIds = new List<int>();
+            CandidatesProgress = new List<VacancyStageInfoDTO>();
+            Files = new List<FileDTO>();
         }
 
         public string Title { get; set; }
@@ -28,22 +25,21 @@ namespace BaseOfTalents.DAL.DTO
         public DateTime? EndDate { get; set; }
         public DateTime? DeadlineDate { get; set; }
 
-        public IEnumerable<Level> Levels { get; set; }
-        public IEnumerable<Location> Locations { get; set; }
-        public IEnumerable<Skill> RequiredSkills { get; set; }
-        public IEnumerable<VacancyStageInfo> CandidatesProgress { get; set; }
-        public IEnumerable<File> Files { get; set; }
-        public IEnumerable<Comment> Comments { get; set; }
-        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<int> LevelIds { get; set; }
+        public IEnumerable<int> LocationIds { get; set; }
+        public IEnumerable<int> RequiredSkillIds { get; set; }
+        public IEnumerable<VacancyStageInfoDTO> CandidatesProgress { get; set; }
+        public IEnumerable<int> TagIds { get; set; }
+        public IEnumerable<FileDTO> Files { get; set; }
 
-        public Vacancy ParentVacancy { get; set; }
+        public int? ParentVacancyId { get; set; }
 
-        public Industry Industry { get; set; }
+        public int? IndustryId { get; set; }
 
-        public Department Department { get; set; }
+        public int DepartmentId { get; set; }
 
-        public User Responsible { get; set; }
+        public int ResponsibleId { get; set; }
 
-        public LanguageSkill LanguageSkill { get; set; }
+        public LanguageSkillDTO LanguageSkill { get; set; }
     }
 }
