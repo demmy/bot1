@@ -1,4 +1,5 @@
 ﻿using BaseOfTalents.DAL.Services;
+using BaseOfTalents.WebUI.Infrastructure;
 using BaseOfTalents.WebUI.Models;
 using DAL.Services;
 using Domain.DTO.DTOModels;
@@ -29,17 +30,23 @@ namespace BaseOfTalents.WebUI.Controllers
         {
             if(ModelState.IsValid)
             {
-                var searchResult = service.Get(
-                    vacancyParams.UserId, 
-                    vacancyParams.IndustryId, 
-                    vacancyParams.Title, 
-                    vacancyParams.VacancyState, 
-                    vacancyParams.TypeOfEmployment, 
-                    vacancyParams.LevelIds, 
-                    vacancyParams.LocationIds, 
-                    vacancyParams.Current, 
-                    vacancyParams.Size).Select(x=> DTOService.ToViewModel<VacancyDTO, VacancySearchModel>(x));
-                return Json(searchResult, BOT_SERIALIZER_SETTINGS);
+                var tupleResult = service.Get(
+                    vacancyParams.UserId,
+                    vacancyParams.IndustryId,
+                    vacancyParams.Title,
+                    vacancyParams.VacancyState,
+                    vacancyParams.TypeOfEmployment,
+                    vacancyParams.LevelIds,
+                    vacancyParams.LocationIds,
+                    vacancyParams.Current,
+                    vacancyParams.Size
+                    );
+
+                var vacanciesViewModel = tupleResult.Item1.Select(x=> DTOService.ToViewModel<VacancyDTO, VacancySearchModel>(x));
+                var total = tupleResult.Item2;
+
+                var ret = new { Vacancies = vacanciesViewModel, Current = vacancyParams.Current, Size = vacancyParams.Size, Total = total };
+                return Json(ret, BOT_SERIALIZER_SETTINGS);
             }
             return BadRequest();
         }

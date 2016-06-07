@@ -11,9 +11,7 @@ namespace BaseOfTalents.DAL.Infrastructure
         IEnumerable<TEntity> Get(
             IEnumerable<Expression<Func<TEntity, bool>>> filters = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "",
-            int page = 1,
-            int pageSize = 20);
+            string includeProperties = "");
 
         TEntity GetByID(object id);
 

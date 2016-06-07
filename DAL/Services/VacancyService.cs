@@ -23,16 +23,17 @@ namespace BaseOfTalents.DAL.Services
             this.uow = uow;
         }
 
-        public IEnumerable<VacancyDTO> Get(
+        public Tuple<IEnumerable<VacancyDTO>, int> Get(
             int? userId,
             int? industryId, 
             string title, 
             int? vacancyState,
             int? typeOfEmployment,
             IEnumerable<int> levelIds,
-            IEnumerable<int> locationIds,
-            int current, 
-            int size)
+            IEnumerable<int> locationIds, 
+            int current,
+            int size
+            )
         {
             var filters = new List<Expression<Func<Vacancy, bool>>>();
 
@@ -64,9 +65,12 @@ namespace BaseOfTalents.DAL.Services
             {
                 filters.Add(x => x.Locations.Any(loc => locationIds.Contains(loc.Id)));
             }
-            return uow.VacancyRepo
-                .Get(filters, page: current, pageSize: size)
-                .Select(x => DTOService.ToDTO<Vacancy, VacancyDTO>(x));
+
+            var vacancies = uow.VacancyRepo.Get(filters);
+            var total = vacancies.Count();
+            return new Tuple<IEnumerable<VacancyDTO>, int>(
+                vacancies.Skip(current * size).Take(size).Select(vacancy => DTOService.ToDTO<Vacancy, VacancyDTO>(vacancy)), 
+                total);
         }
     }
 }

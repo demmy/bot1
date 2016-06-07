@@ -24,7 +24,7 @@ namespace BaseOfTalents.DAL.Repositories
         public virtual IEnumerable<TEntity> Get(
             IEnumerable<Expression<Func<TEntity, bool>>> filters = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "", int page = 1, int pageSize = 20)
+            string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
 
@@ -44,10 +44,7 @@ namespace BaseOfTalents.DAL.Repositories
                 query = query.Include(includeProperty);
             }
             
-            return orderBy(query)
-                .Skip(page * pageSize)
-                .Take(pageSize)
-                .ToList();
+            return orderBy(query).ToList();
         }
 
         public virtual TEntity GetByID(object id)
