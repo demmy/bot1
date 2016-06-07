@@ -38,7 +38,7 @@ namespace BaseOfTalents.DAL.Services
             int? vacancyState,
             int? typeOfEmployment,
             IEnumerable<int> levelIds,
-            IEnumerable<int> locationIds,
+            IEnumerable<int> locationIds, 
             int current,
             int size
             )
