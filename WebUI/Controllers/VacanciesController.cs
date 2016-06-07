@@ -1,6 +1,8 @@
 ﻿using BaseOfTalents.DAL.Services;
+using BaseOfTalents.WebUI.Extensions;
 using BaseOfTalents.WebUI.Infrastructure;
 using BaseOfTalents.WebUI.Models;
+using DAL.Exceptions;
 using DAL.Services;
 using Domain.DTO.DTOModels;
 using Newtonsoft.Json;
@@ -12,7 +14,7 @@ using System.Web.Http.Results;
 
 namespace BaseOfTalents.WebUI.Controllers
 {
-    [RoutePrefix("api/vacancy")]
+    [RoutePrefix("api/vacancies")]
     public class VacanciesController : ApiController
     {
         protected static JsonSerializerSettings BOT_SERIALIZER_SETTINGS = new JsonSerializerSettings
@@ -52,24 +54,56 @@ namespace BaseOfTalents.WebUI.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("")]
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            var foundedEntity = service.Get(id);
+            if(foundedEntity!=null)
+            {
+                return Json(foundedEntity, BOT_SERIALIZER_SETTINGS);
+            }
+            return BadRequest();
         }
 
         // POST api/<controller>
-        public void Post([FromBody] string value)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody]VacancyDTO vacancy)
         {
+            if(!ModelState.IsValid)
+            {
+                return Json(ModelState.Errors(), BOT_SERIALIZER_SETTINGS);
+            }
+            var updatedVacancy = service.Add(vacancy);
+            return Json(updatedVacancy, BOT_SERIALIZER_SETTINGS);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IHttpActionResult Put(int id, [FromBody]VacancyDTO vacancy)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Errors(), BOT_SERIALIZER_SETTINGS);
+            }
+
+            var updatedVacancy = service.Update(vacancy);
+            return Json(updatedVacancy, BOT_SERIALIZER_SETTINGS);
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
+            try
+            { 
+                service.Delete(id);
+                return Ok();
+            }
+            catch (EntityNotFoundException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

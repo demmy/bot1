@@ -1,14 +1,14 @@
 ﻿using BaseOfTalents.DAL.Infrastructure;
 using BaseOfTalents.DAL.Repositories;
+using DAL.Infrastructure;
+using DAL.Repositories;
 using System.Data.Entity;
 
 namespace BaseOfTalents.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
-        
         private readonly DbContext context;
-
 
         public UnitOfWork(DbContext context)
         {
@@ -59,6 +59,19 @@ namespace BaseOfTalents.DAL
             }
         }
 
+        public ILevelRepository LevelRepo
+        {
+            get
+            {
+                if (levelRepo == null)
+                {
+                    levelRepo = new LevelRepository(context);
+                }
+
+                return levelRepo;
+            }
+        }
+
         public IVacancyRepository VacancyRepo
         {
             get
@@ -72,10 +85,83 @@ namespace BaseOfTalents.DAL
             }
         }
 
+        public ILocationRepository LocationRepo
+        {
+            get
+            {
+                if (locationRepo == null)
+                {
+                    locationRepo = new LocationRepository(context);
+                }
+
+                return locationRepo;
+            }
+        }
+
+        public ITagRepository TagRepo
+        {
+            get
+            {
+                if (tagRepo == null)
+                {
+                    tagRepo = new TagRepository(context);
+                }
+
+                return tagRepo;
+            }
+        }
+
+
+        public ISkillRepository SkillRepo
+        {
+            get
+            {
+                if (skillRepo == null)
+                {
+                    skillRepo = new SkillRepository(context);
+                }
+
+                return skillRepo;
+            }
+        }
+        public ILanguageSkillRepository LanguageSkillRepo
+        {
+            get
+            {
+                if (languageSkillRepo == null)
+                {
+                    languageSkillRepo = new LanguageSkillRepository(context);
+                }
+
+                return languageSkillRepo;
+            }
+        }
+
+        public IVacancyStageRepository VacancyStageRepo
+        {
+            get
+            {
+                if (vacancyStageRepo == null)
+                {
+                    vacancyStageRepo = new VacancyStageRepository(context);
+                }
+
+                return vacancyStageRepo;
+            }
+        }
+
         private IFileRepository fileRepo;
         private ICandidateRepository candidateRepo;
         private IUserRepository userRepo;
         private IVacancyRepository vacancyRepo;
+        private ILevelRepository levelRepo;
+        private ILocationRepository locationRepo;
+        private ITagRepository tagRepo;
+        private ISkillRepository skillRepo;
+        private ILanguageSkillRepository languageSkillRepo;
+        private IVacancyStageRepository vacancyStageRepo;
+
+
 
         public void Commit()
         {

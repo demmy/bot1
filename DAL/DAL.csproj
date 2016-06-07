@@ -87,9 +87,14 @@
     <Compile Include="DTO\VacancyDTO.cs" />
     <Compile Include="DTO\VacancyStageDTO.cs" />
     <Compile Include="DTO\VacancyStageInfoDTO.cs" />
+    <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Extensions\FileExtension.cs" />
     <Compile Include="Extensions\IPagedList.cs" />
+    <Compile Include="Extensions\LanguageSkillExtension.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\PagedList.cs" />
+    <Compile Include="Extensions\VacancyExtension.cs" />
+    <Compile Include="Extensions\VacancyStageInfoExtension.cs" />
     <Compile Include="Infrastructure\ICandidateRepository.cs" />
     <Compile Include="Infrastructure\ICommentRepository.cs" />
     <Compile Include="Infrastructure\ICountryRepository.cs" />
@@ -100,6 +105,7 @@
     <Compile Include="Infrastructure\IEventTypeRepository.cs" />
     <Compile Include="Infrastructure\IFileRepository.cs" />
     <Compile Include="Infrastructure\ILanguageRepository.cs" />
+    <Compile Include="Infrastructure\ILanguageSkillRepository.cs" />
     <Compile Include="Infrastructure\ILevelRepository.cs" />
     <Compile Include="Infrastructure\ILocationRepository.cs" />
     <Compile Include="Infrastructure\IPermissionRepository.cs" />
@@ -113,6 +119,7 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\IUserRepository.cs" />
     <Compile Include="Infrastructure\IVacancyRepository.cs" />
+    <Compile Include="Infrastructure\IVacancyStageRepository.cs" />
     <Compile Include="Mapping\BaseEntityConfiguration.cs" />
     <Compile Include="Mapping\CandidateConfiguration.cs" />
     <Compile Include="Mapping\CandidateSocialConfiguration.cs" />
@@ -141,9 +148,9 @@
     <Compile Include="Mapping\VacancyConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageInfoConfiguration.cs" />
-    <Compile Include="Migrations\201606061225186_init.cs" />
-    <Compile Include="Migrations\201606061225186_init.Designer.cs">
-      <DependentUpon>201606061225186_init.cs</DependentUpon>
+    <Compile Include="Migrations\201606061322589_init.cs" />
+    <Compile Include="Migrations\201606061322589_init.Designer.cs">
+      <DependentUpon>201606061322589_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DummyData.cs" />
@@ -156,12 +163,15 @@
     <Compile Include="Repositories\DepartmentRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
     <Compile Include="Repositories\LanguageRepository.cs" />
+    <Compile Include="Repositories\LanguageSkillRepository.cs" />
     <Compile Include="Repositories\LevelRepository.cs" />
+    <Compile Include="Repositories\LocationRepository.cs" />
     <Compile Include="Repositories\SkillRepository.cs" />
     <Compile Include="Repositories\SocialNetworkRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\VacancyRepository.cs" />
+    <Compile Include="Repositories\VacancyStageRepository.cs" />
     <Compile Include="Services\DTOService.cs" />
     <Compile Include="Services\VacancyService.cs" />
     <Compile Include="UnitOfWork.cs" />
@@ -177,8 +187,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606061225186_init.resx">
-      <DependentUpon>201606061225186_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606061322589_init.resx">
+      <DependentUpon>201606061322589_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
