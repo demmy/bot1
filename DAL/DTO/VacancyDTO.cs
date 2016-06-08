@@ -1,6 +1,7 @@
 ﻿using BaseOfTalents.Domain.Entities.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.DTO.DTOModels
 {
@@ -16,7 +17,10 @@ namespace Domain.DTO.DTOModels
             Files = new List<FileDTO>();
         }
 
+        [Required]
         public string Title { get; set; }
+
+        [Required]
         public string Description { get; set; }
         public int SalaryMin { get; set; }
         public int SalaryMax { get; set; }

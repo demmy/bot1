@@ -14,7 +14,7 @@ using System.Web.Http.Results;
 
 namespace BaseOfTalents.WebUI.Controllers
 {
-    [RoutePrefix("api/vacancies")]
+    [RoutePrefix("api/vacancy")]
     public class VacanciesController : ApiController
     {
         protected static JsonSerializerSettings BOT_SERIALIZER_SETTINGS = new JsonSerializerSettings
@@ -55,7 +55,7 @@ namespace BaseOfTalents.WebUI.Controllers
 
         // GET api/<controller>/5
         [HttpGet]
-        [Route("")]
+        [Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
             var foundedEntity = service.Get(id);
@@ -68,6 +68,7 @@ namespace BaseOfTalents.WebUI.Controllers
 
         // POST api/<controller>
         [HttpPost]
+        [Route("")]
         public IHttpActionResult Post([FromBody]VacancyDTO vacancy)
         {
             if(!ModelState.IsValid)
@@ -80,7 +81,8 @@ namespace BaseOfTalents.WebUI.Controllers
 
         // PUT api/<controller>/5
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody]VacancyDTO vacancy)
+        [Route("")]
+        public IHttpActionResult Put([FromBody]VacancyDTO vacancy)
         {
             if (!ModelState.IsValid)
             {
@@ -93,6 +95,7 @@ namespace BaseOfTalents.WebUI.Controllers
 
         // DELETE api/<controller>/5
         [HttpDelete]
+        [Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {
             try

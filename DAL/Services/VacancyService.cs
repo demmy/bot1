@@ -86,6 +86,7 @@ namespace BaseOfTalents.DAL.Services
             var vacancyToUpdate = uow.VacancyRepo.GetByID(vacancy.Id);
             vacancyToUpdate.Update(vacancy, uow);
             uow.VacancyRepo.Update(vacancyToUpdate);
+            uow.Commit();
             return DTOService.ToDTO<Vacancy, VacancyDTO>(vacancyToUpdate);
         }
 
@@ -94,6 +95,7 @@ namespace BaseOfTalents.DAL.Services
             var vacancyToAdd = new Vacancy();
             vacancyToAdd.Update(vacancy, uow);
             uow.VacancyRepo.Insert(vacancyToAdd);
+            uow.Commit();
             return DTOService.ToDTO<Vacancy, VacancyDTO>(vacancyToAdd);
         }
         public void Delete(int id)
@@ -104,6 +106,7 @@ namespace BaseOfTalents.DAL.Services
                 throw new EntityNotFoundException("Vacancy not found");
             }
             uow.VacancyRepo.Delete(id);
+            uow.Commit();
         }
     }
 }
