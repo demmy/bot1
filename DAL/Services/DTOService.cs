@@ -14,11 +14,11 @@ namespace DAL.Services
             return Mapper.Map<DomainEntity, DTO>(entity);
         }
 
-        public static ViewModel ToViewModel<DTO, ViewModel>(DTO entity)
+        public static DomainEntity ToEntity<DTO, DomainEntity>(DTO entity)
             where DTO :             BaseEntityDTO,  new()
-            where ViewModel :                       new()
+            where DomainEntity :    BaseEntity,     new()
         {
-            return Mapper.Map<DTO, ViewModel>(entity);
+            return Mapper.Map<DTO, DomainEntity>(entity);
         }
     }
 }

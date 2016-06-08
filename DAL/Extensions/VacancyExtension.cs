@@ -87,7 +87,7 @@ namespace DAL.Extensions
                 var domainVacancyStageInfo = destination.CandidatesProgress.FirstOrDefault(x => x.Id == updatedVacanciesStageInfo.Id);
                 if (domainVacancyStageInfo == null)
                 {
-                    throw new ArgumentNullException("Request contains unknown entity");
+                    throw new ArgumentNullException("You trying to update vacanies progress which is actually doesn't exists in database");
                 }
                 if (updatedVacanciesStageInfo.VacancyStage.IsCommentRequired)
                 {

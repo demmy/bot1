@@ -612,7 +612,7 @@ namespace BaseOfTalents.DAL.Migrations
                     {
                         DeadlineDate = DateTime.Now.AddDays(RandomNumber(-40, 40)),
                         Department = Departments.GetRandom(),
-                        Description = GetRandomString(250),
+                        Description = LoremIpsum(5, 40, 1, 5, 1),
                         Industry = Industries.GetRandom(),
                         LanguageSkill = LanguageSkills.GetRandom(),
                         Levels = Levels.Take(RandomNumber(0, Levels.Count)).ToList(),
@@ -626,6 +626,7 @@ namespace BaseOfTalents.DAL.Migrations
                         TypeOfEmployment = TypeOfEmployment.FullTime,
                         EndDate = DateTime.Now.AddDays(RandomNumber(0, 30)),
                         Tags = Enumerable.Repeat(Tags.GetRandom(), RandomNumber(0, 5)).Distinct().ToList(),
+                        Comments = Enumerable.Repeat(new Comment { Message = LoremIpsum(3, 15, 1, 2, 1) }, RandomNumber(0, 5)).Distinct().ToList(),
                         State = EntityState.Open
                     }
                     );
@@ -643,7 +644,8 @@ namespace BaseOfTalents.DAL.Migrations
                 {
                     LocationId = RandomNumber(1, Locations.Count - 1),
                     BirthDate = DateTime.Now.AddYears(RandomNumber(-40, -20)),
-                    Comments = new List<Comment>(),
+                    Comments = 
+                        Enumerable.Repeat(new Comment { Message = LoremIpsum(3, 15, 1, 2, 1) }, RandomNumber(0, 5)).Distinct().ToList(),
                     Education = GetRandomString(15),
                     FirstName = names.GetRandom(),
                     IndustryId = RandomNumber(1, Industries.Count - 1),
@@ -712,8 +714,32 @@ namespace BaseOfTalents.DAL.Migrations
             {
                 stringChars[i] = nums[RandomNumber(0, nums.Length)];
             }
-
             return new string(stringChars);
+        }
+
+        static string LoremIpsum(int minWords, int maxWords, int minSentences, int maxSentences, int numParagraphs)
+        {
+            var words = new[]{"lorem", "ipsum", "dolor", "sit", "amet", "consectetuer",
+          "adipiscing", "elit", "sed", "diam", "nonummy", "nibh", "euismod",
+          "tincidunt", "ut", "laoreet", "dolore", "magna", "aliquam", "erat"};
+
+            int numSentences = RandomNumber(0, maxSentences - minSentences) + minSentences + 1;
+            int numWords = RandomNumber(0, maxWords - minWords) + minWords + 1;
+
+            System.Text.StringBuilder result = new System.Text.StringBuilder();
+            for (int p = 0; p < numParagraphs; p++)
+            {
+                for (int s = 0; s < numSentences; s++)
+                {
+                    for (int w = 0; w < numWords; w++)
+                    {
+                        if (w > 0) { result.Append(" "); }
+                        result.Append(words[RandomNumber(0, words.Length)]);
+                    }
+                    result.Append(". ");
+                }
+            }
+            return result.ToString();
         }
 
         #region randomizer

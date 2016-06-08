@@ -1,25 +1,17 @@
 ﻿using BaseOfTalents.DAL.Infrastructure;
 using BaseOfTalents.Domain.Entities;
-using DAL.Exceptions;
 using DAL.Extensions;
-using DAL.Services;
 using Domain.DTO.DTOModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace BaseOfTalents.DAL.Services
+namespace DAL.Services
 {
-    public partial class VacancyService
+    public partial class VacancyService 
     {
-        private readonly IUnitOfWork uow;
-
-        public VacancyService()
-        {
-            uow = new UnitOfWork();
-        }
-
+        IUnitOfWork uow;
         public VacancyService(IUnitOfWork uow)
         {
             this.uow = uow;
@@ -27,15 +19,15 @@ namespace BaseOfTalents.DAL.Services
 
         public VacancyDTO Get(int id)
         {
-            var vacancy = uow.VacancyRepo.GetByID(id);
-            return DTOService.ToDTO<Vacancy, VacancyDTO>(vacancy);
+            var entity = uow.VacancyRepo.GetByID(id);
+            return DTOService.ToDTO<Vacancy, VacancyDTO>(entity);
         }
 
         public Tuple<IEnumerable<VacancyDTO>, int> Get(
             int? userId,
             int? industryId,
             string title,
-            int? vacancyState,
+            int? state,
             int? typeOfEmployment,
             IEnumerable<int> levelIds,
             IEnumerable<int> locationIds, 
@@ -57,9 +49,9 @@ namespace BaseOfTalents.DAL.Services
             {
                 filters.Add(x => x.Title.ToLower().Contains(title.ToLower()));
             }
-            if (vacancyState.HasValue)
+            if (state.HasValue)
             {
-                filters.Add(x => (int)x.State == vacancyState);
+                filters.Add(x => (int)x.State == state);
             }
             if (typeOfEmployment.HasValue)
             {
@@ -98,15 +90,22 @@ namespace BaseOfTalents.DAL.Services
             uow.Commit();
             return DTOService.ToDTO<Vacancy, VacancyDTO>(vacancyToAdd);
         }
-        public void Delete(int id)
+
+        public bool Delete(int id)
         {
-            var vacancyToDelete = uow.VacancyRepo.GetByID(id);
-            if(vacancyToDelete==null)
+            bool deleteResult;
+            var entityToDelete = uow.VacancyRepo.GetByID(id);
+            if (entityToDelete == null)
             {
-                throw new EntityNotFoundException("Vacancy not found");
+                deleteResult = false;
             }
-            uow.VacancyRepo.Delete(id);
-            uow.Commit();
+            else {
+                uow.VacancyRepo.Delete(id);
+                uow.Commit();
+                deleteResult = true;
+            }
+            return deleteResult;
         }
+
     }
 }
