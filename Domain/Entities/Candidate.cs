@@ -41,6 +41,9 @@ namespace BaseOfTalents.Domain.Entities
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }
 
+        public int? LevelId { get; set; }
+        public virtual Level Level { get; set; }
+
         public int? IndustryId { get; set; }
         public virtual Industry Industry { get; set; }
 

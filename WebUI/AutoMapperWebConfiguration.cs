@@ -114,10 +114,12 @@ namespace WebApi
                     .ForMember(dest => dest.LanguageSkills,         opt => opt.MapFrom(src => Mapper.Map<IEnumerable<LanguageSkill>, IEnumerable<LanguageSkillDTO>>(src.LanguageSkills)))
                     .ForMember(dest => dest.TagIds,                 opt => opt.MapFrom(src => Mapper.Map<IEnumerable<Tag>, IEnumerable<int>>(src.Tags)))
                     .ForMember(dest => dest.SkillIds,               opt => opt.MapFrom(src => Mapper.Map<IEnumerable<Skill>, IEnumerable<int>>(src.Skills)))
+                    .ForMember(dest => dest.Comments,               opt => opt.MapFrom(src => Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(src.Comments)))
                     .ForMember(dest => dest.Files,                  opt => opt.MapFrom(src => Mapper.Map<IEnumerable<File>, IEnumerable<FileDTO>>(src.Files)));
 
                 x.CreateMap<Vacancy, VacancyDTO>()
                     .ForMember(dest => dest.CandidatesProgress,     opt => opt.MapFrom(src => Mapper.Map<IEnumerable<VacancyStageInfo>, IEnumerable<VacancyStageInfoDTO>>(src.CandidatesProgress)))
+                    .ForMember(dest => dest.Comments,               opt => opt.MapFrom(src => Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentDTO>>(src.Comments)))
                     .ForMember(dest => dest.LevelIds,               opt => opt.MapFrom(src => Mapper.Map<IEnumerable<Level>, IEnumerable<int>>(src.Levels)))
                     .ForMember(dest => dest.LocationIds,            opt => opt.MapFrom(src => Mapper.Map<IEnumerable<Location>, IEnumerable<int>>(src.Locations)))
                     .ForMember(dest => dest.TagIds,                 opt => opt.MapFrom(src => Mapper.Map<IEnumerable<Tag>, IEnumerable<int>>(src.Tags)))

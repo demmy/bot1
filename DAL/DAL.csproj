@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -88,14 +90,23 @@
     <Compile Include="DTO\VacancyStageDTO.cs" />
     <Compile Include="DTO\VacancyStageInfoDTO.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Extensions\CandidateExtensions.cs" />
+    <Compile Include="Extensions\CandidateSocialExtensions.cs" />
+    <Compile Include="Extensions\CandidateSourceExtensions.cs" />
+    <Compile Include="Extensions\CommentExtension.cs" />
     <Compile Include="Extensions\FileExtension.cs" />
     <Compile Include="Extensions\IPagedList.cs" />
     <Compile Include="Extensions\LanguageSkillExtension.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\PagedList.cs" />
+    <Compile Include="Extensions\PhoneNumberExtension.cs" />
+    <Compile Include="Extensions\PhotoExtensions.cs" />
+    <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Extensions\VacancyExtension.cs" />
     <Compile Include="Extensions\VacancyStageInfoExtension.cs" />
     <Compile Include="Infrastructure\ICandidateRepository.cs" />
+    <Compile Include="Infrastructure\ICandidateSocialRepository.cs" />
+    <Compile Include="Infrastructure\ICandidateSourceRepository.cs" />
     <Compile Include="Infrastructure\ICommentRepository.cs" />
     <Compile Include="Infrastructure\ICountryRepository.cs" />
     <Compile Include="Infrastructure\IDepartmentGroupRepository.cs" />
@@ -104,11 +115,13 @@
     <Compile Include="Infrastructure\IEventRepository.cs" />
     <Compile Include="Infrastructure\IEventTypeRepository.cs" />
     <Compile Include="Infrastructure\IFileRepository.cs" />
+    <Compile Include="Infrastructure\IIndustryRepository.cs" />
     <Compile Include="Infrastructure\ILanguageRepository.cs" />
     <Compile Include="Infrastructure\ILanguageSkillRepository.cs" />
     <Compile Include="Infrastructure\ILevelRepository.cs" />
     <Compile Include="Infrastructure\ILocationRepository.cs" />
     <Compile Include="Infrastructure\IPermissionRepository.cs" />
+    <Compile Include="Infrastructure\IPhoneNumberRepository.cs" />
     <Compile Include="Infrastructure\IPhotoRepository.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Infrastructure\IRoleRepository.cs" />
@@ -119,6 +132,7 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\IUserRepository.cs" />
     <Compile Include="Infrastructure\IVacancyRepository.cs" />
+    <Compile Include="Infrastructure\IVacancyStageInfoRepository.cs" />
     <Compile Include="Infrastructure\IVacancyStageRepository.cs" />
     <Compile Include="Mapping\BaseEntityConfiguration.cs" />
     <Compile Include="Mapping\CandidateConfiguration.cs" />
@@ -148,31 +162,68 @@
     <Compile Include="Mapping\VacancyConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageInfoConfiguration.cs" />
-    <Compile Include="Migrations\201606061322589_init.cs" />
-    <Compile Include="Migrations\201606061322589_init.Designer.cs">
-      <DependentUpon>201606061322589_init.cs</DependentUpon>
+    <Compile Include="Migrations\201606091347009_init.cs" />
+    <Compile Include="Migrations\201606091347009_init.Designer.cs">
+      <DependentUpon>201606091347009_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DummyData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\CandidateSocialRepository.cs" />
+    <Compile Include="Repositories\CandidateSourceRepository.cs" />
+    <Compile Include="Repositories\CommentRepository.cs" />
+    <Compile Include="Repositories\DepartmentGroupRepository.cs" />
+    <Compile Include="Repositories\EventTypeRepository.cs" />
     <Compile Include="Repositories\FileRepository.cs" />
     <Compile Include="Repositories\CandidateRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\DepartmentRepository.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
+    <Compile Include="Repositories\IndustryRepository.cs" />
+    <Compile Include="Repositories\PhoneNumberRepository.cs" />
     <Compile Include="Repositories\LanguageRepository.cs" />
     <Compile Include="Repositories\LanguageSkillRepository.cs" />
     <Compile Include="Repositories\LevelRepository.cs" />
     <Compile Include="Repositories\LocationRepository.cs" />
+    <Compile Include="Repositories\PermissionRepository.cs" />
+    <Compile Include="Repositories\PhotoRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SkillRepository.cs" />
     <Compile Include="Repositories\SocialNetworkRepository.cs" />
+    <Compile Include="Repositories\StageRepository.cs" />
     <Compile Include="Repositories\TagRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\VacancyRepository.cs" />
+    <Compile Include="Repositories\VacancyStageInfoRepository.cs" />
     <Compile Include="Repositories\VacancyStageRepository.cs" />
+    <Compile Include="Services\AccessRightsService.cs" />
+    <Compile Include="Services\BaseEnumService.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\CandidateService.cs" />
+    <Compile Include="Services\CommentTypeService.cs" />
+    <Compile Include="Services\CountryService.cs" />
+    <Compile Include="Services\DepartmentGroupService.cs" />
+    <Compile Include="Services\DepartmentService.cs" />
     <Compile Include="Services\DTOService.cs" />
+    <Compile Include="Services\EntityStateService.cs" />
+    <Compile Include="Services\EventTypeService.cs" />
+    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\IndustryService.cs" />
+    <Compile Include="Services\LanguageLevelService.cs" />
+    <Compile Include="Services\LanguageService.cs" />
+    <Compile Include="Services\LevelService.cs" />
+    <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\PermissionService.cs" />
+    <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\SkillService.cs" />
+    <Compile Include="Services\SocialNetworkService.cs" />
+    <Compile Include="Services\SourceService.cs" />
+    <Compile Include="Services\StageService.cs" />
+    <Compile Include="Services\TagService.cs" />
+    <Compile Include="Services\TypeOfEmploymentService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\VacancyService.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
@@ -187,8 +238,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606061322589_init.resx">
-      <DependentUpon>201606061322589_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606091347009_init.resx">
+      <DependentUpon>201606091347009_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,6 +8,7 @@ namespace BaseOfTalents.DAL.Repositories
     {
         public SocialNetworkRepository(DbContext context) : base(context)
         {
+
         }
     }
 }

@@ -35,6 +35,7 @@ namespace DAL.Extensions
             PerformLanguageSkillsSaving(destination, source, uow.LanguageSkillRepo);
             PerformVacanciesProgressSaving(destination, source, uow.VacancyStageRepo);
             PerformFilesSaving(destination, source, uow.FileRepo);
+            PerformCommentsSaving(destination, source, uow.CommentRepo);
         }
 
         private static void PerformFilesSaving(Vacancy destination, VacancyDTO source, IFileRepository fileRepository)
@@ -87,7 +88,7 @@ namespace DAL.Extensions
                 var domainVacancyStageInfo = destination.CandidatesProgress.FirstOrDefault(x => x.Id == updatedVacanciesStageInfo.Id);
                 if (domainVacancyStageInfo == null)
                 {
-                    throw new ArgumentNullException("Request contains unknown entity");
+                    throw new ArgumentNullException("You trying to update vacanies progress which is actually doesn't exists in database");
                 }
                 if (updatedVacanciesStageInfo.VacancyStage.IsCommentRequired)
                 {
@@ -165,5 +166,39 @@ namespace DAL.Extensions
                 domainLanguageSkill.Update(updatedLanguageSkill);
             }
         }
+        private static void PerformCommentsSaving(Vacancy destination, VacancyDTO source, IRepository<Comment> commentRepository)
+        {
+            RefreshExistingComments(destination, source, commentRepository);
+            CreateNewComments(destination, source);
+        }
+        private static void CreateNewComments(Vacancy destination, VacancyDTO source)
+        {
+            source.Comments.Where(x => x.IsNew()).ToList().ForEach(newComment =>
+            {
+                var toDomain = new Comment();
+                toDomain.Update(newComment);
+                destination.Comments.Add(toDomain);
+            });
+        }
+        private static void RefreshExistingComments(Vacancy destination, VacancyDTO source, IRepository<Comment> commentRepository)
+        {
+            source.Comments.Where(x => !x.IsNew()).ToList().ForEach(updatedComment =>
+            {
+                var domainComment = destination.Comments.FirstOrDefault(x => x.Id == updatedComment.Id);
+                if (domainComment == null)
+                {
+                    throw new ArgumentNullException("You trying to update comment which is actually doesn't exists in database");
+                }
+                if (updatedComment.ShouldBeRemoved())
+                {
+                    commentRepository.Delete(updatedComment.Id);
+                }
+                else
+                {
+                    domainComment.Update(updatedComment);
+                }
+            });
+        }
+
     }
 }
