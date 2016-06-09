@@ -1,6 +1,8 @@
 ﻿using BaseOfTalents.DAL.Infrastructure;
 using BaseOfTalents.Domain.Entities;
 using BaseOfTalents.Domain.Entities.Enum.Setup;
+using DAL.Extensions;
+using DAL.Services;
 using Domain.DTO.DTOModels;
 using System;
 using System.Linq;
@@ -39,6 +41,7 @@ namespace DAL.Extensions
             PerformSkillsSaving(destination, source, uow.SkillRepo);
             PerformPhotoSaving(destination, source, uow.PhotoRepo);
             PerformFilesSaving(destination, source, uow.FileRepo);
+            PerformCommentsSaving(destination, source, uow.CommentRepo);
         }
 
         private static void PerformFilesSaving(Candidate destination, CandidateDTO source, IRepository<File> fileRepository)
@@ -281,5 +284,40 @@ namespace DAL.Extensions
                 }
             });
         }
+
+        private static void PerformCommentsSaving(Candidate destination, CandidateDTO source, IRepository<Comment> commentRepository)
+        {
+            RefreshExistingComments(destination, source, commentRepository);
+            CreateNewComments(destination, source);
+        }
+        private static void CreateNewComments(Candidate destination, CandidateDTO source)
+        {
+            source.Comments.Where(x => x.IsNew()).ToList().ForEach(newComment =>
+            {
+                var toDomain = new Comment();
+                toDomain.Update(newComment);
+                destination.Comments.Add(toDomain);
+            });
+        }
+        private static void RefreshExistingComments(Candidate destination, CandidateDTO source, IRepository<Comment> commentRepository)
+        {
+            source.Comments.Where(x => !x.IsNew()).ToList().ForEach(updatedComment =>
+            {
+                var domainComment = destination.Comments.FirstOrDefault(x => x.Id == updatedComment.Id);
+                if (domainComment == null)
+                {
+                    throw new ArgumentNullException("You trying to update comment which is actually doesn't exists in database");
+                }
+                if (updatedComment.ShouldBeRemoved())
+                {
+                    commentRepository.Delete(updatedComment.Id);
+                }
+                else
+                {
+                    domainComment.Update(updatedComment);
+                }
+            });
+        }
+
     }
 }

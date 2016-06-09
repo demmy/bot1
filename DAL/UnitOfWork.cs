@@ -38,6 +38,8 @@ namespace BaseOfTalents.DAL
         private IVacancyStageInfoRepository     vacancyStageInfoRepo;
         private ICandidateSocialRepository      candidateSocialRepo;
         private ICandidateSourceRepository      candidateSourceRepo;
+        private ICommentRepository              commentRepo;
+
 
         public UnitOfWork(DbContext context)
         {
@@ -371,6 +373,19 @@ namespace BaseOfTalents.DAL
                 }
 
                 return vacancyStageInfoRepo;
+            }
+        }
+
+        public ICommentRepository CommentRepo
+        {
+            get
+            {
+                if (commentRepo == null)
+                {
+                    commentRepo = new CommentRepository(context);
+                }
+
+                return commentRepo;
             }
         }
 

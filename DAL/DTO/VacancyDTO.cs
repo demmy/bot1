@@ -35,6 +35,7 @@ namespace Domain.DTO.DTOModels
         public IEnumerable<VacancyStageInfoDTO> CandidatesProgress { get; set; }
         public IEnumerable<int> TagIds { get; set; }
         public IEnumerable<FileDTO> Files { get; set; }
+        public IEnumerable<CommentDTO> Comments { get; set; }
 
         public int? ParentVacancyId { get; set; }
 
