@@ -162,9 +162,9 @@
     <Compile Include="Mapping\VacancyConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageConfiguration.cs" />
     <Compile Include="Mapping\VacancyStageInfoConfiguration.cs" />
-    <Compile Include="Migrations\201606061322589_init.cs" />
-    <Compile Include="Migrations\201606061322589_init.Designer.cs">
-      <DependentUpon>201606061322589_init.cs</DependentUpon>
+    <Compile Include="Migrations\201606091347009_init.cs" />
+    <Compile Include="Migrations\201606091347009_init.Designer.cs">
+      <DependentUpon>201606091347009_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DummyData.cs" />
@@ -238,8 +238,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606061322589_init.resx">
-      <DependentUpon>201606061322589_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606091347009_init.resx">
+      <DependentUpon>201606091347009_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

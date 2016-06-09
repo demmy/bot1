@@ -644,7 +644,7 @@ namespace BaseOfTalents.DAL.Migrations
                 {
                     LocationId = RandomNumber(1, Locations.Count - 1),
                     BirthDate = DateTime.Now.AddYears(RandomNumber(-40, -20)),
-                    Comments = 
+                    Comments =
                         Enumerable.Repeat(new Comment { Message = LoremIpsum(3, 15, 1, 2, 1) }, RandomNumber(0, 5)).Distinct().ToList(),
                     Education = GetRandomString(15),
                     FirstName = names.GetRandom(),
@@ -673,6 +673,7 @@ namespace BaseOfTalents.DAL.Migrations
                     StartExperience = DateTime.Now.AddYears(-RandomNumber(0, 10)),
                     Tags = new List<Tag>(),
                     TypeOfEmployment = TypeOfEmployment.FullTime,
+                    Level = Levels.GetRandom(),
                     VacanciesProgress = new List<VacancyStageInfo>()
                 };
                 candidates.Add(candidate);
